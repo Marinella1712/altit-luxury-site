@@ -7,249 +7,329 @@
   <meta name="description" content="אלטיט לוקסורי — ניהול ואחזקת בתים משותפים באילת. השקט לבעלי הדירות." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Heebo:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Heebo:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body class="lang-he">
 
-  <!-- ===== NAVIGATION ===== -->
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- NAV -->
   <nav id="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="logo">
-        <img src="assets/logo.svg" alt="Altit Luxury" class="logo-img" height="48" />
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/logo.svg" alt="Altit Luxury" />
       </a>
-      <ul class="nav-links">
-        <li><a href="#about" data-i18n="nav_about"></a></li>
-        <li><a href="#services" data-i18n="nav_services"></a></li>
-        <li><a href="#why" data-i18n="nav_method"></a></li>
-        <li><a href="#gallery" data-i18n="nav_gallery"></a></li>
-        <li><a href="#testimonials" data-i18n="nav_testimonials"></a></li>
-        <li><a href="#contact" data-i18n="nav_contact"></a></li>
-      </ul>
-      <div class="nav-right">
+      <div class="nav-center">
+        <a href="#about" data-i18n="nav_about"></a>
+        <a href="#services" data-i18n="nav_services"></a>
+        <a href="#why" data-i18n="nav_method"></a>
+        <a href="#gallery" data-i18n="nav_gallery"></a>
+        <a href="#contact" data-i18n="nav_contact"></a>
+      </div>
+      <div class="nav-end">
         <div class="lang-switcher">
           <button class="lang-btn active" data-lang="he">עב</button>
           <button class="lang-btn" data-lang="fr">FR</button>
           <button class="lang-btn" data-lang="en">EN</button>
         </div>
-        <button class="nav-toggle" id="navToggle">
-          <span></span><span></span><span></span>
+        <button class="burger" id="burger">
+          <span></span><span></span>
         </button>
       </div>
     </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#services" data-i18n="nav_services"></a>
+      <a href="#why" data-i18n="nav_method"></a>
+      <a href="#gallery" data-i18n="nav_gallery"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-bg">
+      <img src="assets/blue-space.jpeg" alt="" class="hero-bg-img" />
       <div class="hero-overlay"></div>
-      <div class="hero-particles" id="particles"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-tagline-top" data-i18n="hero_pre"></p>
-      <h1 class="hero-title">
-        <span class="hero-name">ALTIT</span>
-        <span class="hero-luxury">LUXURY</span>
+      <div class="hero-eyebrow reveal-line">
+        <span class="line-inner" data-i18n="hero_pre"></span>
+      </div>
+      <h1 class="hero-headline">
+        <span class="hero-word reveal-line"><span class="line-inner">ALTIT</span></span>
+        <span class="hero-word gold reveal-line" style="--delay:.15s"><span class="line-inner">LUXURY</span></span>
       </h1>
-      <div class="hero-divider">
-        <span class="line"></span>
-        <span class="diamond">◆</span>
-        <span class="line"></span>
-      </div>
-      <p class="hero-tagline" data-i18n="hero_tagline"></p>
-      <p class="hero-sub" data-i18n="hero_sub"></p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-gold" data-i18n="hero_cta"></a>
-        <a href="#services" class="btn btn-outline" data-i18n="hero_cta2"></a>
+      <p class="hero-sub reveal-line" style="--delay:.3s">
+        <span class="line-inner" data-i18n="hero_tagline"></span>
+      </p>
+      <div class="hero-actions reveal-line" style="--delay:.45s">
+        <span class="line-inner">
+          <a href="#contact" class="btn-primary" data-i18n="hero_cta"></a>
+          <a href="#services" class="btn-ghost" data-i18n="hero_cta2"></a>
+        </span>
       </div>
     </div>
-    <div class="hero-scroll"><span></span></div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-badge">
+      <span>Eilat</span>
+      <span class="dot">·</span>
+      <span>Israel</span>
+      <span class="dot">·</span>
+      <span>Since 2019</span>
+    </div>
   </section>
 
-  <!-- ===== STATS BAND ===== -->
+  <!-- MARQUEE BAND -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span>ניהול מקצועי</span><span class="sep">◆</span>
+      <span>Gestion professionnelle</span><span class="sep">◆</span>
+      <span>Professional management</span><span class="sep">◆</span>
+      <span>אחזקה מלאה</span><span class="sep">◆</span>
+      <span>Maintenance complète</span><span class="sep">◆</span>
+      <span>Blue Space Eilat</span><span class="sep">◆</span>
+      <span>השקט לבעלי הדירות</span><span class="sep">◆</span>
+      <span>Tranquillité pour les propriétaires</span><span class="sep">◆</span>
+      <span>ניהול מקצועי</span><span class="sep">◆</span>
+      <span>Gestion professionnelle</span><span class="sep">◆</span>
+      <span>Professional management</span><span class="sep">◆</span>
+      <span>אחזקה מלאה</span><span class="sep">◆</span>
+      <span>Maintenance complète</span><span class="sep">◆</span>
+      <span>Blue Space Eilat</span><span class="sep">◆</span>
+      <span>השקט לבעלי הדירות</span><span class="sep">◆</span>
+      <span>Tranquillité pour les propriétaires</span><span class="sep">◆</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
   <section id="stats">
-    <div class="stats-container">
-      <div class="stat-item">
-        <span class="stat-num" data-target="6">0</span><span class="stat-plus">+</span>
-        <p data-i18n="stat1"></p>
+    <div class="stats-grid">
+      <div class="stat" data-scroll>
+        <div class="stat-number"><span class="count" data-target="6">0</span>+</div>
+        <div class="stat-label" data-i18n="stat1"></div>
       </div>
-      <div class="stat-divider">◆</div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="10">0</span><span class="stat-plus">+</span>
-        <p data-i18n="stat2"></p>
+      <div class="stat-divider"></div>
+      <div class="stat" data-scroll>
+        <div class="stat-number"><span class="count" data-target="10">0</span>+</div>
+        <div class="stat-label" data-i18n="stat2"></div>
       </div>
-      <div class="stat-divider">◆</div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="98">0</span><span class="stat-plus">%</span>
-        <p data-i18n="stat3"></p>
+      <div class="stat-divider"></div>
+      <div class="stat" data-scroll>
+        <div class="stat-number"><span class="count" data-target="98">0</span>%</div>
+        <div class="stat-label" data-i18n="stat3"></div>
       </div>
-      <div class="stat-divider">◆</div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="24">0</span><span class="stat-plus">/7</span>
-        <p data-i18n="stat4"></p>
+      <div class="stat-divider"></div>
+      <div class="stat" data-scroll>
+        <div class="stat-number">24<span style="font-size:0.5em">/7</span></div>
+        <div class="stat-label" data-i18n="stat4"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
+  <!-- ABOUT -->
   <section id="about">
-    <div class="section-container">
-      <div class="about-grid">
-        <div class="about-image">
-          <div class="about-img-frame">
-            <img src="assets/building-entrance.jpeg" alt="Altit Luxury — immeuble géré à Eilat" class="about-photo" />
-            <div class="about-badge">
-              <span class="badge-num">2019</span>
-              <span data-i18n="badge_exp"></span>
-            </div>
+    <div class="about-layout">
+      <div class="about-visual" data-scroll>
+        <div class="about-img-wrap">
+          <img src="assets/building-entrance.jpeg" alt="Altit Luxury" />
+          <div class="about-img-badge">
+            <span class="badge-year">2019</span>
+            <span class="badge-text" data-i18n="badge_exp"></span>
           </div>
         </div>
-        <div class="about-text">
-          <span class="section-label" data-i18n="about_label"></span>
-          <h2 class="section-title" data-i18n="about_title"></h2>
-          <div class="gold-line"></div>
-          <p data-i18n="about_p1"></p>
-          <p data-i18n="about_p2"></p>
-          <p class="about-highlight" data-i18n="about_p3"></p>
-          <div class="about-values">
-            <div class="value-item"><span class="value-icon">◆</span><span data-i18n="value1"></span></div>
-            <div class="value-item"><span class="value-icon">◆</span><span data-i18n="value2"></span></div>
-            <div class="value-item"><span class="value-icon">◆</span><span data-i18n="value3"></span></div>
-            <div class="value-item"><span class="value-icon">◆</span><span data-i18n="value4"></span></div>
-          </div>
-          <div class="founder-block">
-            <span class="founder-label">Yankel Altit</span>
-            <span class="founder-role" data-i18n="about_label"></span>
-          </div>
-          <a href="#contact" class="btn btn-gold" data-i18n="about_cta"></a>
+        <div class="about-float-card">
+          <div class="float-icon">◆</div>
+          <p data-i18n="about_p3"></p>
         </div>
+      </div>
+      <div class="about-body" data-scroll>
+        <span class="eyebrow" data-i18n="about_label"></span>
+        <h2 class="section-title" data-i18n="about_title"></h2>
+        <div class="gold-rule"></div>
+        <p data-i18n="about_p1"></p>
+        <p data-i18n="about_p2"></p>
+        <ul class="values-list">
+          <li><span class="v-icon">◆</span><span data-i18n="value1"></span></li>
+          <li><span class="v-icon">◆</span><span data-i18n="value2"></span></li>
+          <li><span class="v-icon">◆</span><span data-i18n="value3"></span></li>
+          <li><span class="v-icon">◆</span><span data-i18n="value4"></span></li>
+        </ul>
+        <div class="founder-row">
+          <div class="founder-avatar">YA</div>
+          <div>
+            <strong>Yankel Altit</strong>
+            <span data-i18n="founder_role"></span>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" data-i18n="about_cta"></a>
       </div>
     </div>
   </section>
 
-  <!-- ===== SERVICES ===== -->
+  <!-- SERVICES -->
   <section id="services">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-label" data-i18n="services_label"></span>
-        <h2 class="section-title" data-i18n="services_title"></h2>
-        <div class="gold-line center"></div>
-        <p class="section-intro" data-i18n="services_intro"></p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card" data-aos="fade-up" data-delay="0">
-          <div class="service-icon">🏛️</div>
+    <div class="services-header" data-scroll>
+      <span class="eyebrow light" data-i18n="services_label"></span>
+      <h2 class="section-title light" data-i18n="services_title"></h2>
+    </div>
+    <div class="services-list">
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">01</div>
+        <div class="sr-icon">🏛️</div>
+        <div class="sr-body">
           <h3 data-i18n="s1_title"></h3>
           <p data-i18n="s1_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="80">
-          <div class="service-icon">💰</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">02</div>
+        <div class="sr-icon">💰</div>
+        <div class="sr-body">
           <h3 data-i18n="s2_title"></h3>
           <p data-i18n="s2_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="160">
-          <div class="service-icon">🔧</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">03</div>
+        <div class="sr-icon">🔧</div>
+        <div class="sr-body">
           <h3 data-i18n="s3_title"></h3>
           <p data-i18n="s3_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="240">
-          <div class="service-icon">🧹</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">04</div>
+        <div class="sr-icon">🧹</div>
+        <div class="sr-body">
           <h3 data-i18n="s4_title"></h3>
           <p data-i18n="s4_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="320">
-          <div class="service-icon">📋</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">05</div>
+        <div class="sr-icon">📋</div>
+        <div class="sr-body">
           <h3 data-i18n="s5_title"></h3>
           <p data-i18n="s5_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="400">
-          <div class="service-icon">💳</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">06</div>
+        <div class="sr-icon">💳</div>
+        <div class="sr-body">
           <h3 data-i18n="s6_title"></h3>
           <p data-i18n="s6_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="480">
-          <div class="service-icon">⚙️</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">07</div>
+        <div class="sr-icon">⚙️</div>
+        <div class="sr-body">
           <h3 data-i18n="s7_title"></h3>
           <p data-i18n="s7_desc"></p>
         </div>
-        <div class="service-card" data-aos="fade-up" data-delay="560">
-          <div class="service-icon">📜</div>
+        <div class="sr-arrow">→</div>
+      </div>
+
+      <div class="service-row" data-scroll>
+        <div class="sr-num">08</div>
+        <div class="sr-icon">📜</div>
+        <div class="sr-body">
           <h3 data-i18n="s8_title"></h3>
           <p data-i18n="s8_desc"></p>
         </div>
+        <div class="sr-arrow">→</div>
       </div>
+
     </div>
   </section>
 
-  <!-- ===== WHY US ===== -->
+  <!-- WHY -->
   <section id="why">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-label light" data-i18n="why_label"></span>
-        <h2 class="section-title light" data-i18n="why_title"></h2>
-        <div class="gold-line center"></div>
-        <p class="section-intro light" data-i18n="why_intro"></p>
+    <div class="why-container">
+      <div class="why-header" data-scroll>
+        <span class="eyebrow" data-i18n="why_label"></span>
+        <h2 class="section-title" data-i18n="why_title"></h2>
+        <div class="gold-rule"></div>
       </div>
       <div class="why-grid">
-        <div class="why-card" data-aos="fade-up" data-delay="0">
-          <div class="why-num">01</div>
+        <div class="why-item" data-scroll>
+          <div class="wi-number">01</div>
           <h3 data-i18n="w1_title"></h3>
           <p data-i18n="w1_desc"></p>
         </div>
-        <div class="why-card" data-aos="fade-up" data-delay="100">
-          <div class="why-num">02</div>
+        <div class="why-item" data-scroll style="--d:.1s">
+          <div class="wi-number">02</div>
           <h3 data-i18n="w2_title"></h3>
           <p data-i18n="w2_desc"></p>
         </div>
-        <div class="why-card" data-aos="fade-up" data-delay="200">
-          <div class="why-num">03</div>
+        <div class="why-item" data-scroll style="--d:.2s">
+          <div class="wi-number">03</div>
           <h3 data-i18n="w3_title"></h3>
           <p data-i18n="w3_desc"></p>
         </div>
-        <div class="why-card" data-aos="fade-up" data-delay="300">
-          <div class="why-num">04</div>
+        <div class="why-item" data-scroll style="--d:.3s">
+          <div class="wi-number">04</div>
           <h3 data-i18n="w4_title"></h3>
           <p data-i18n="w4_desc"></p>
         </div>
       </div>
 
-      <!-- DARIMPO sub-block -->
-      <div class="darimpo-block" data-aos="fade-up">
-        <div class="darimpo-text">
-          <span class="section-label light" data-i18n="darimpo_label"></span>
-          <h3 class="darimpo-title" data-i18n="darimpo_title"></h3>
-          <p class="darimpo-desc" data-i18n="darimpo_desc"></p>
-          <ul class="darimpo-features">
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f1"></span></li>
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f2"></span></li>
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f3"></span></li>
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f4"></span></li>
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f5"></span></li>
-            <li><span class="df-dot">◆</span><span data-i18n="darimpo_f6"></span></li>
+      <!-- DARIMPO -->
+      <div class="darimpo-wrap" data-scroll>
+        <div class="darimpo-info">
+          <span class="eyebrow" data-i18n="darimpo_label"></span>
+          <h3 data-i18n="darimpo_title"></h3>
+          <p data-i18n="darimpo_desc"></p>
+          <ul class="dp-list">
+            <li><span>◆</span><span data-i18n="darimpo_f1"></span></li>
+            <li><span>◆</span><span data-i18n="darimpo_f2"></span></li>
+            <li><span>◆</span><span data-i18n="darimpo_f3"></span></li>
+            <li><span>◆</span><span data-i18n="darimpo_f4"></span></li>
+            <li><span>◆</span><span data-i18n="darimpo_f5"></span></li>
+            <li><span>◆</span><span data-i18n="darimpo_f6"></span></li>
           </ul>
         </div>
-        <div class="darimpo-screen">
-          <div class="darimpo-mockup">
-            <div class="dm-header">
-              <span class="dm-dot r"></span><span class="dm-dot y"></span><span class="dm-dot g"></span>
-              <span class="dm-title">DARIMPO</span>
+        <div class="darimpo-device">
+          <div class="device-frame">
+            <div class="device-bar">
+              <span class="db r"></span><span class="db y"></span><span class="db g"></span>
+              <span class="device-name">DARIMPO</span>
             </div>
-            <div class="dm-nav">
-              <span class="dm-nav-item active">ראשי</span>
-              <span class="dm-nav-item">משימות</span>
-              <span class="dm-nav-item">תשלומים</span>
-              <span class="dm-nav-item">דיירים</span>
+            <div class="device-nav">
+              <span class="dn active">ראשי</span>
+              <span class="dn">משימות</span>
+              <span class="dn">תשלומים</span>
+              <span class="dn">דיירים</span>
             </div>
-            <div class="dm-content">
-              <div class="dm-card">
-                <div class="dm-card-label">Blue Space — אילת</div>
-                <div class="dm-card-row"><span class="dm-tag green">✓ תשלום</span><span class="dm-val">דירה 12</span></div>
-                <div class="dm-card-row"><span class="dm-tag orange">⚠ משימה</span><span class="dm-val">אחזקת מעלית</span></div>
-                <div class="dm-card-row"><span class="dm-tag blue">📢 הודעה</span><span class="dm-val">ניקיון פרוזדור</span></div>
-              </div>
-              <div class="dm-mini">
-                <div class="dm-mini-bar" style="width:78%"></div>
-                <div class="dm-mini-bar short" style="width:55%"></div>
-                <div class="dm-mini-bar" style="width:90%"></div>
+            <div class="device-body">
+              <div class="db-project">Blue Space — אילת</div>
+              <div class="db-row"><span class="dbt green">✓ שולם</span><span class="dbv">דירה 12</span></div>
+              <div class="db-row"><span class="dbt orange">⚠ משימה</span><span class="dbv">מעלית — בדיקה</span></div>
+              <div class="db-row"><span class="dbt blue">📢 הודעה</span><span class="dbv">ניקיון פרוזדור</span></div>
+              <div class="db-bars">
+                <div class="db-bar" style="width:82%"></div>
+                <div class="db-bar dim" style="width:60%"></div>
+                <div class="db-bar" style="width:91%"></div>
               </div>
             </div>
           </div>
@@ -258,193 +338,189 @@
     </div>
   </section>
 
-  <!-- ===== GALLERY ===== -->
+  <!-- GALLERY -->
   <section id="gallery">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-label" data-i18n="gallery_label"></span>
-        <h2 class="section-title" data-i18n="gallery_title"></h2>
-        <div class="gold-line center"></div>
+    <div class="gallery-header" data-scroll>
+      <span class="eyebrow" data-i18n="gallery_label"></span>
+      <h2 class="section-title" data-i18n="gallery_title"></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item g-large" data-scroll>
+        <img src="assets/blue-space.jpeg" alt="Blue Space Eilat" />
+        <div class="g-overlay">
+          <span>Blue Space — אילת</span>
+        </div>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item large">
-          <img src="assets/blue-space.jpeg" alt="Blue Space Eilat" loading="lazy" />
-          <div class="gallery-caption">Blue Space — אילת</div>
+      <div class="g-item" data-scroll style="--d:.1s">
+        <img src="assets/building-entrance.jpeg" alt="Altit Luxury" />
+        <div class="g-overlay">
+          <span>כניסה מנוהלת — אילת</span>
         </div>
-        <div class="gallery-item">
-          <img src="assets/building-entrance.jpeg" alt="Altit Luxury — Entrée immeuble" loading="lazy" />
-          <div class="gallery-caption">כניסה מנוהלת — אילת</div>
-        </div>
-        <div class="gallery-item"><div class="gallery-placeholder"><span>📸</span></div></div>
-        <div class="gallery-item"><div class="gallery-placeholder"><span>📸</span></div></div>
-        <div class="gallery-item"><div class="gallery-placeholder"><span>📸</span></div></div>
+      </div>
+      <div class="g-item g-placeholder" data-scroll style="--d:.2s">
+        <div class="g-ph-inner"><span>+</span><p data-i18n="gallery_add"></p></div>
+      </div>
+      <div class="g-item g-placeholder" data-scroll style="--d:.3s">
+        <div class="g-ph-inner"><span>+</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== TESTIMONIALS ===== -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-label light" data-i18n="testi_label"></span>
+    <div class="testi-container">
+      <div class="testi-header" data-scroll>
+        <span class="eyebrow light" data-i18n="testi_label"></span>
         <h2 class="section-title light" data-i18n="testi_title"></h2>
-        <div class="gold-line center"></div>
       </div>
-      <div class="testimonials-slider" id="testiSlider">
-        <div class="testi-card active">
-          <div class="stars">★★★★★</div>
-          <p class="testi-text" data-i18n="t1_text"></p>
-          <div class="testi-author">
-            <div class="author-avatar">א</div>
-            <div><strong data-i18n="t1_name"></strong><span data-i18n="t1_loc"></span></div>
+      <div class="testi-stage">
+        <div class="testi-cards" id="testiCards">
+          <div class="tc active">
+            <div class="tc-stars">★★★★★</div>
+            <blockquote data-i18n="t1_text"></blockquote>
+            <div class="tc-author">
+              <div class="tc-av">א</div>
+              <div><strong data-i18n="t1_name"></strong><span data-i18n="t1_loc"></span></div>
+            </div>
+          </div>
+          <div class="tc">
+            <div class="tc-stars">★★★★★</div>
+            <blockquote data-i18n="t2_text"></blockquote>
+            <div class="tc-author">
+              <div class="tc-av">מ</div>
+              <div><strong data-i18n="t2_name"></strong><span data-i18n="t2_loc"></span></div>
+            </div>
+          </div>
+          <div class="tc">
+            <div class="tc-stars">★★★★★</div>
+            <blockquote data-i18n="t3_text"></blockquote>
+            <div class="tc-author">
+              <div class="tc-av">ר</div>
+              <div><strong data-i18n="t3_name"></strong><span data-i18n="t3_loc"></span></div>
+            </div>
           </div>
         </div>
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-text" data-i18n="t2_text"></p>
-          <div class="testi-author">
-            <div class="author-avatar">מ</div>
-            <div><strong data-i18n="t2_name"></strong><span data-i18n="t2_loc"></span></div>
+        <div class="testi-nav">
+          <button id="tPrev">←</button>
+          <div class="t-dots">
+            <span class="td active" data-i="0"></span>
+            <span class="td" data-i="1"></span>
+            <span class="td" data-i="2"></span>
           </div>
+          <button id="tNext">→</button>
         </div>
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-text" data-i18n="t3_text"></p>
-          <div class="testi-author">
-            <div class="author-avatar">ר</div>
-            <div><strong data-i18n="t3_name"></strong><span data-i18n="t3_loc"></span></div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-controls">
-        <button class="testi-btn" id="testiPrev">‹</button>
-        <div class="testi-dots">
-          <span class="dot active" data-idx="0"></span>
-          <span class="dot" data-idx="1"></span>
-          <span class="dot" data-idx="2"></span>
-        </div>
-        <button class="testi-btn" id="testiNext">›</button>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONTACT ===== -->
+  <!-- CONTACT -->
   <section id="contact">
-    <div class="section-container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <span class="section-label" data-i18n="contact_label"></span>
-          <h2 class="section-title" data-i18n="contact_title"></h2>
-          <div class="gold-line"></div>
-          <p data-i18n="contact_intro"></p>
-          <div class="contact-details">
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <div>
-                <strong data-i18n="contact_addr_label"></strong>
-                <p data-i18n="contact_addr"></p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📞</span>
-              <div>
-                <strong data-i18n="contact_phone_label"></strong>
-                <p><a href="tel:+972547923868">054-792-3868</a></p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">✉️</span>
-              <div>
-                <strong data-i18n="contact_email_label"></strong>
-                <p><a href="mailto:altitluxury@gmail.com">altitluxury@gmail.com</a></p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">🕐</span>
-              <div>
-                <strong data-i18n="contact_hours_label"></strong>
-                <p data-i18n="contact_hours"></p>
-              </div>
-            </div>
+    <div class="contact-wrap">
+      <div class="contact-left" data-scroll>
+        <span class="eyebrow" data-i18n="contact_label"></span>
+        <h2 class="section-title" data-i18n="contact_title"></h2>
+        <div class="gold-rule"></div>
+        <p data-i18n="contact_intro"></p>
+
+        <div class="contact-items">
+          <div class="ci">
+            <div class="ci-icon">📞</div>
+            <div><strong data-i18n="contact_phone_label"></strong><a href="tel:+972547923868">054-792-3868</a></div>
           </div>
-          <a href="https://www.facebook.com/ALTITluxury" target="_blank" class="social-link facebook">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Altit Luxury
+          <div class="ci">
+            <div class="ci-icon">✉️</div>
+            <div><strong data-i18n="contact_email_label"></strong><a href="mailto:altitluxury@gmail.com">altitluxury@gmail.com</a></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">📍</div>
+            <div><strong data-i18n="contact_addr_label"></strong><span data-i18n="contact_addr"></span></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">🕐</div>
+            <div><strong data-i18n="contact_hours_label"></strong><span data-i18n="contact_hours"></span></div>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a href="https://wa.me/972547923868" target="_blank" class="cs-btn whatsapp">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
           </a>
-          <a href="https://www.instagram.com/altitluxury/" target="_blank" class="social-link instagram">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <a href="https://www.instagram.com/altitluxury/" target="_blank" class="cs-btn instagram">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             @altitluxury
           </a>
-          <a href="https://wa.me/972547923868" target="_blank" class="btn btn-whatsapp">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span data-i18n="contact_whatsapp"></span>
+          <a href="https://www.facebook.com/ALTITluxury" target="_blank" class="cs-btn facebook">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
           </a>
         </div>
-        <div class="contact-form-wrap">
-          <form id="contactForm" class="contact-form">
-            <div class="form-group">
-              <label data-i18n="form_name"></label>
-              <input type="text" name="name" required />
+      </div>
+
+      <div class="contact-right" data-scroll>
+        <form id="contactForm">
+          <div class="fg">
+            <label data-i18n="form_name"></label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="fg-row">
+            <div class="fg">
+              <label data-i18n="form_phone"></label>
+              <input type="tel" name="phone" />
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label data-i18n="form_phone"></label>
-                <input type="tel" name="phone" />
-              </div>
-              <div class="form-group">
-                <label data-i18n="form_email"></label>
-                <input type="email" name="email" required />
-              </div>
+            <div class="fg">
+              <label data-i18n="form_email"></label>
+              <input type="email" name="email" required />
             </div>
-            <div class="form-group">
-              <label data-i18n="form_subject"></label>
-              <select name="subject">
-                <option value="" data-i18n="form_select"></option>
-                <option value="info" data-i18n="form_opt1"></option>
-                <option value="quote" data-i18n="form_opt2"></option>
-                <option value="new" data-i18n="form_opt3"></option>
-                <option value="other" data-i18n="form_opt4"></option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label data-i18n="form_message"></label>
-              <textarea name="message" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-gold full" data-i18n="form_send"></button>
-          </form>
-          <div id="formSuccess" class="form-success hidden" data-i18n="form_success"></div>
-        </div>
+          </div>
+          <div class="fg">
+            <label data-i18n="form_subject"></label>
+            <select name="subject">
+              <option value="" data-i18n="form_select"></option>
+              <option value="info" data-i18n="form_opt1"></option>
+              <option value="quote" data-i18n="form_opt2"></option>
+              <option value="new" data-i18n="form_opt3"></option>
+              <option value="other" data-i18n="form_opt4"></option>
+            </select>
+          </div>
+          <div class="fg">
+            <label data-i18n="form_message"></label>
+            <textarea name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full" data-i18n="form_send"></button>
+        </form>
+        <div id="formOk" class="form-ok hidden" data-i18n="form_success"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer id="footer">
-    <div class="footer-container">
+    <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/logo.svg" alt="Altit Luxury" height="52" class="footer-logo-img" />
-          <p class="footer-tagline" data-i18n="footer_tagline"></p>
-          <p class="footer-company" data-i18n="footer_company"></p>
+          <img src="assets/logo.svg" alt="Altit Luxury" class="footer-logo" />
+          <p data-i18n="footer_tagline"></p>
         </div>
-        <div class="footer-links-col">
-          <a href="#about" data-i18n="nav_about"></a>
-          <a href="#services" data-i18n="nav_services"></a>
-          <a href="#why" data-i18n="nav_method"></a>
-          <a href="#gallery" data-i18n="nav_gallery"></a>
-          <a href="#contact" data-i18n="nav_contact"></a>
-        </div>
-        <div class="footer-contact-col">
-          <a href="tel:+972547923868">📞 054-792-3868</a>
-          <a href="mailto:altitluxury@gmail.com">✉ altitluxury@gmail.com</a>
-          <a href="https://wa.me/972547923868" target="_blank">💬 WhatsApp</a>
-          <a href="https://www.facebook.com/ALTITluxury" target="_blank">📘 Altit Luxury</a>
-          <a href="https://www.instagram.com/altitluxury/" target="_blank">📸 @altitluxury</a>
-          <p>📍 אילת, ישראל</p>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4 data-i18n="nav_about"></h4>
+            <a href="#about" data-i18n="nav_about"></a>
+            <a href="#services" data-i18n="nav_services"></a>
+            <a href="#why" data-i18n="nav_method"></a>
+          </div>
+          <div class="footer-col">
+            <h4 data-i18n="nav_contact"></h4>
+            <a href="tel:+972547923868">054-792-3868</a>
+            <a href="mailto:altitluxury@gmail.com">altitluxury@gmail.com</a>
+            <a href="https://www.instagram.com/altitluxury/" target="_blank">@altitluxury</a>
+            <a href="https://www.facebook.com/ALTITluxury" target="_blank">Facebook</a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2024 Altit Luxury Building Management & Maintenance Ltd. <span data-i18n="footer_rights"></span></p>
+        <p data-i18n="footer_company"></p>
+        <p>© 2024 · <span data-i18n="footer_rights"></span></p>
       </div>
     </div>
   </footer>

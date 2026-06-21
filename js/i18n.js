@@ -37,6 +37,7 @@ const translations = {
     value3: "תיאום ספקים ומעקב איכות",
     value4: "הגנה על ערך הנכס שלכם",
     about_cta: "הכירו אותנו",
+    founder_role: "מייסד ומנכ\"ל",
     img_placeholder: "תמונת הצוות",
     badge_exp: "ניסיון\nמשנת 2019",
 
@@ -162,6 +163,7 @@ const translations = {
     value3: "Coordination et contrôle des fournisseurs",
     value4: "Protection de la valeur de votre bien",
     about_cta: "En savoir plus",
+    founder_role: "Fondateur & Directeur Général",
     img_placeholder: "Photo de l'équipe",
     badge_exp: "Expérience\ndepuis 2019",
 
@@ -279,6 +281,7 @@ const translations = {
     value3: "Vendor coordination and quality control",
     value4: "Protection of your property value",
     about_cta: "Learn more",
+    founder_role: "Founder & CEO",
     img_placeholder: "Team photo",
     badge_exp: "Experience\nsince 2019",
 
