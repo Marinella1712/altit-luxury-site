@@ -391,8 +391,14 @@ body.lang-he .eyebrow::after {
 .marquee-track .dot { opacity: 0.35; font-size: 0.5rem; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ===== STATS ===== */
-#stats { padding: 5rem 2rem; background: var(--black2); }
+/* ===== STATS — overlaps hero from below ===== */
+#stats {
+  padding: 5rem 2rem 6rem;
+  background: var(--black2);
+  position: relative; z-index: 4;
+  margin-top: -120px;
+  clip-path: polygon(0 120px, 100% 0, 100% 100%, 0 100%);
+}
 .stats-inner {
   max-width: 1000px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(4,1fr);
@@ -422,7 +428,14 @@ body.lang-he .eyebrow::after {
 .stat-lbl { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-dim); }
 
 /* ===== ABOUT ===== */
-#about { padding: 8rem 2rem; background: var(--black); position: relative; overflow: hidden; }
+#about {
+  padding: 8rem 2rem 10rem;
+  background: var(--black);
+  position: relative; z-index: 3;
+  overflow: visible;
+  margin-top: -80px;
+  clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+}
 .about-glow1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(201,168,124,0.06) 0%, transparent 70%); top: -100px; left: -200px; }
 .about-glow2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(201,168,124,0.08) 0%, transparent 70%); bottom: 0; right: -100px; }
 
@@ -432,7 +445,12 @@ body.lang-he .eyebrow::after {
 }
 body.lang-he .about-inner { direction: rtl; }
 
-.about-visual { position: relative; }
+/* About photo breaks OUT of its section downward */
+.about-visual {
+  position: relative;
+  z-index: 10;
+  margin-bottom: -120px; /* photo spills into services below */
+}
 .about-photo-wrap {
   position: relative; aspect-ratio: 4/5; overflow: hidden;
 }
@@ -481,7 +499,14 @@ body.lang-he .about-card { left: auto; right: -2.5rem; border-left: none; border
 .fp-role { display: block; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 0.1rem; }
 
 /* ===== SERVICES — BENTO GRID ===== */
-#services { padding: 8rem 2rem; background: var(--black2); position: relative; overflow: hidden; }
+#services {
+  padding: 8rem 2rem 10rem;
+  background: var(--black2);
+  position: relative; z-index: 2;
+  overflow: visible;
+  margin-top: -80px;
+  clip-path: polygon(0 0, 100% 80px, 100% 100%, 0 100%);
+}
 .services-glow { width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(201,168,124,0.07) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
 
 .services-head { max-width: 1280px; margin: 0 auto 4rem; }
@@ -526,7 +551,14 @@ body.lang-he .bento-num { right: auto; left: 1.5rem; }
 .bento-card p { font-size: 0.83rem; color: var(--gray-dim); line-height: 1.7; position: relative; z-index: 1; }
 
 /* ===== WHY US ===== */
-#why { padding: 8rem 2rem; background: var(--black); position: relative; overflow: hidden; }
+#why {
+  padding: 8rem 2rem 10rem;
+  background: var(--black);
+  position: relative; z-index: 3;
+  overflow: visible;
+  margin-top: -80px;
+  clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+}
 .why-bg-text {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
   font-family: var(--serif); font-size: clamp(6rem, 20vw, 18rem); font-weight: 900;
@@ -573,8 +605,8 @@ body.lang-he .darimpo-glow { right: auto; left: -100px; }
 .dp-feat { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
 .dp-feat-dot { color: var(--gold); font-size: 0.35rem; flex-shrink: 0; }
 
-/* Device mockup */
-.device { display: flex; justify-content: center; }
+/* Device mockup — breaks out of why section into gallery */
+.device { display: flex; justify-content: center; position: relative; z-index: 10; margin-bottom: -100px; }
 .device-shell {
   width: 100%; max-width: 310px;
   background: #0b0e14; border-radius: 14px;
@@ -603,7 +635,13 @@ body.lang-he .dv-title { margin-right: 0; margin-left: auto; }
 .dv-bar.dim { background: rgba(255,255,255,0.06); opacity: 1; }
 
 /* ===== GALLERY ===== */
-#gallery { padding: 8rem 2rem; background: var(--black2); }
+#gallery {
+  padding: 8rem 2rem 10rem;
+  background: var(--black2);
+  position: relative; z-index: 2;
+  margin-top: -80px;
+  clip-path: polygon(0 0, 100% 80px, 100% 100%, 0 100%);
+}
 .gallery-inner { max-width: 1280px; margin: 0 auto; }
 .gallery-head { margin-bottom: 3rem; }
 .gallery-grid {
@@ -634,7 +672,13 @@ body.lang-he .dv-title { margin-right: 0; margin-left: auto; }
 .gi-ph p { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; }
 
 /* ===== TESTIMONIALS ===== */
-#testimonials { padding: 8rem 2rem; background: var(--black); position: relative; overflow: hidden; }
+#testimonials {
+  padding: 8rem 2rem 10rem;
+  background: var(--black);
+  position: relative; z-index: 3;
+  margin-top: -80px;
+  clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+}
 .testi-glow {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   width: 700px; height: 300px;
@@ -678,7 +722,13 @@ body.lang-he .dv-title { margin-right: 0; margin-left: auto; }
 .tn-dot.on { background: var(--gold); transform: scale(1.4); }
 
 /* ===== CONTACT ===== */
-#contact { padding: 8rem 2rem; background: var(--black2); position: relative; overflow: hidden; }
+#contact {
+  padding: 8rem 2rem 10rem;
+  background: var(--black2);
+  position: relative; z-index: 2;
+  margin-top: -80px;
+  clip-path: polygon(0 0, 100% 80px, 100% 100%, 0 100%);
+}
 .contact-glow {
   position: absolute; bottom: -100px; right: -100px;
   width: 400px; height: 400px;
@@ -760,6 +810,11 @@ body.lang-he .dv-title { margin-right: 0; margin-left: auto; }
   .mobile-menu { display: flex; }
   .about-inner { grid-template-columns: 1fr; gap: 3rem; }
   .about-card { display: none; }
+  .about-visual { margin-bottom: 0; }
+  .device { margin-bottom: 0; }
+  #stats, #about, #services, #why, #gallery, #testimonials, #contact {
+    margin-top: 0; clip-path: none;
+  }
   .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 250px; }
   .gi.big { grid-row: 1; grid-column: span 2; }
@@ -781,43 +836,8 @@ body.lang-he .dv-title { margin-right: 0; margin-left: auto; }
   .hero-btns { flex-direction: column; align-items: center; }
 }
 
-/* ===== SECTION TRANSITIONS — gold fade between sections ===== */
-#stats::before, #about::before, #services::before, #why::before,
-#gallery::before, #testimonials::before, #contact::before {
-  content: '';
-  display: block;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(201,168,124,0.25) 30%, rgba(201,168,124,0.25) 70%, transparent 100%);
-}
-
-/* Smooth bottom fade from each section into next */
-#hero::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-  background: linear-gradient(to bottom, transparent, var(--black2));
-  pointer-events: none; z-index: 3;
-}
-#stats::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--black));
-  pointer-events: none;
-}
-#services::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--black));
-  pointer-events: none;
-}
-#gallery::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--black));
-  pointer-events: none;
-}
-#about, #services, #why, #gallery, #testimonials, #contact {
-  position: relative;
-}
+/* ===== MARQUEE stays on top of diagonal cuts ===== */
+.marquee-wrap { position: relative; z-index: 5; }
 
 /* ===== GRAIN OVERLAY ===== */
 body::after {

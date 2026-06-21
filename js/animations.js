@@ -123,16 +123,16 @@ window.addEventListener('load', () => {
 
   if (aboutVisual) {
     gsap.from(aboutVisual, {
-      opacity: 0, x: -60, duration: 1.1, ease: 'power3.out',
-      scrollTrigger: { trigger: '#about', start: 'top 75%' }
+      opacity: 0, y: 80, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: '#about', start: 'top 80%' }
     });
     gsap.from('.about-photo-badge', {
-      opacity: 0, scale: 0.7, duration: 0.8, delay: 0.4, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: '#about', start: 'top 75%' }
+      opacity: 0, scale: 0.7, duration: 0.8, delay: 0.5, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#about', start: 'top 80%' }
     });
     gsap.from('.about-card', {
-      opacity: 0, x: 30, duration: 0.8, delay: 0.5, ease: 'power3.out',
-      scrollTrigger: { trigger: '#about', start: 'top 75%' }
+      opacity: 0, x: 30, duration: 0.8, delay: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: '#about', start: 'top 80%' }
     });
   }
 
