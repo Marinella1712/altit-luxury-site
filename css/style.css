@@ -952,12 +952,10 @@ body.lang-he .dm-title { margin-right: 0; margin-left: auto; }
   margin-top: 0.5rem;
   transition: var(--transition);
 }
-.social-link.instagram {
-  color: var(--gray-text);
-}
-.social-link.instagram:hover {
-  color: #E1306C;
-}
+.social-link.facebook { color: var(--gray-text); }
+.social-link.facebook:hover { color: #1877F2; }
+.social-link.instagram { color: var(--gray-text); }
+.social-link.instagram:hover { color: #E1306C; }
 
 .btn-whatsapp {
   display: inline-flex;
