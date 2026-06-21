@@ -452,6 +452,12 @@ body.lang-he .about-grid { direction: rtl; }
   max-height: 520px;
 }
 
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .about-img-placeholder {
   width: 100%;
   height: 100%;
@@ -578,6 +584,20 @@ body.lang-he .about-grid { direction: rtl; }
   transition: transform 0.5s ease;
 }
 .gallery-item:hover img { transform: scale(1.05); }
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-family: var(--font-serif);
+  letter-spacing: 0.08em;
+  padding: 1.5rem 1rem 0.8rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.gallery-item:hover .gallery-caption { opacity: 1; }
 
 /* ===== TESTIMONIALS ===== */
 #testimonials {
