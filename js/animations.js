@@ -31,24 +31,25 @@ window.addEventListener('load', () => {
   const heroBtns = document.querySelector('.hero-btns');
   const heroBgImg = document.querySelector('.hero-bg-img');
 
-  /* Parallax on hero background */
-  if (heroBgImg) {
-    gsap.to(heroBgImg, {
-      yPercent: 25,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-  }
+  /* Parallax on hero orbs */
+  gsap.to('.hero-orb1', {
+    y: -80, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+  gsap.to('.hero-orb2', {
+    y: -50, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+
+  /* Hero logo */
+  gsap.from('.hero-logo-wrap', {
+    opacity: 0, y: -20, duration: 0.9, delay: 0.2, ease: 'power3.out'
+  });
 
   /* Hero tag pill */
   if (heroTag) {
     gsap.from(heroTag, {
-      opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out'
+      opacity: 0, y: 20, duration: 0.8, delay: 0.5, ease: 'power3.out'
     });
   }
 
