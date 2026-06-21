@@ -4,303 +4,205 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Utility: split text into word spans ─── */
 function splitWords(el) {
   if (!el) return [];
-  const text = el.textContent.trim();
-  el.innerHTML = text.split(' ').map(w => `<span class="word"><span class="word-inner">${w}</span></span>`).join(' ');
+  el.innerHTML = el.textContent.trim().split(' ')
+    .map(w => `<span class="word"><span class="word-inner">${w}</span></span>`).join(' ');
   return el.querySelectorAll('.word-inner');
 }
 
-/* ─── Utility: split text into char spans ─── */
 function splitChars(el) {
   if (!el) return [];
-  const text = el.textContent.trim();
-  el.innerHTML = text.split('').map(c => c === ' ' ? ' ' : `<span class="char">${c}</span>`).join('');
+  el.innerHTML = el.textContent.trim().split('')
+    .map(c => c === ' ' ? ' ' : `<span class="char">${c}</span>`).join('');
   return el.querySelectorAll('.char');
 }
 
 window.addEventListener('load', () => {
 
-  /* ===== HERO ANIMATIONS ===== */
+  /* ===== HERO ===== */
+  gsap.from('.hero-logo-wrap', { opacity: 0, y: -20, duration: .9, delay: .2, ease: 'power3.out' });
+  gsap.from('.hero-tag',       { opacity: 0, y: 16,  duration: .8, delay: .5, ease: 'power3.out' });
+
   const heroName = document.querySelector('.hero-name');
-  const heroLuxury = document.querySelector('.hero-luxury');
-  const heroTag = document.querySelector('.hero-tag');
-  const heroTagline = document.querySelector('.hero-tagline');
-  const heroDivider = document.querySelector('.hero-divider');
-  const heroBtns = document.querySelector('.hero-btns');
-  const heroBgImg = document.querySelector('.hero-bg-img');
-
-  /* Parallax on hero orbs */
-  gsap.to('.hero-orb1', {
-    y: -80, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-  gsap.to('.hero-orb2', {
-    y: -50, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-
-  /* Hero logo */
-  gsap.from('.hero-logo-wrap', {
-    opacity: 0, y: -20, duration: 0.9, delay: 0.2, ease: 'power3.out'
-  });
-
-  /* Hero tag pill */
-  if (heroTag) {
-    gsap.from(heroTag, {
-      opacity: 0, y: 20, duration: 0.8, delay: 0.5, ease: 'power3.out'
-    });
-  }
-
-  /* Hero title — char by char */
   if (heroName) {
     const chars = splitChars(heroName);
     gsap.from(chars, {
-      opacity: 0, y: 60, rotateX: -40,
-      stagger: 0.06, duration: 1, delay: 0.6,
-      ease: 'power4.out',
-      transformOrigin: '0% 50% -50'
+      opacity: 0, y: 70, rotateX: -45, stagger: .055,
+      duration: 1.1, delay: .7, ease: 'power4.out',
+      transformOrigin: '0 50% -50'
     });
   }
 
-  /* LUXURY subtitle */
-  if (heroLuxury) {
-    gsap.from(heroLuxury, {
-      opacity: 0, letterSpacing: '1em', duration: 1.2, delay: 1,
-      ease: 'power3.out'
-    });
-  }
+  gsap.from('.hero-luxury',  { opacity: 0, letterSpacing: '1.2em', duration: 1.3, delay: 1.1, ease: 'power3.out' });
+  gsap.from('.hero-divider', { scaleX: 0, duration: .9, delay: 1.4, ease: 'power3.out', transformOrigin: 'center' });
 
-  /* Divider line */
-  if (heroDivider) {
-    gsap.from(heroDivider, {
-      scaleX: 0, duration: 1, delay: 1.3, ease: 'power3.out', transformOrigin: 'center'
-    });
-  }
-
-  /* Tagline words */
+  const heroTagline = document.querySelector('.hero-tagline');
   if (heroTagline) {
     const words = splitWords(heroTagline);
-    gsap.from(words, {
-      opacity: 0, y: 30,
-      stagger: 0.05, duration: 0.7, delay: 1.4,
-      ease: 'power3.out'
-    });
+    gsap.from(words, { opacity: 0, y: 22, stagger: .04, duration: .7, delay: 1.5, ease: 'power3.out' });
   }
 
-  /* Buttons */
-  if (heroBtns) {
-    gsap.from(heroBtns.children, {
-      opacity: 0, y: 20, stagger: 0.15, duration: 0.7, delay: 1.8,
-      ease: 'power3.out'
-    });
-  }
+  gsap.from('.hero-btns > *', { opacity: 0, y: 18, stagger: .15, duration: .7, delay: 1.9, ease: 'power3.out' });
 
-  /* ===== MARQUEE — speed up on scroll ===== */
-  const marqueeTrack = document.querySelector('.marquee-track');
-  if (marqueeTrack) {
-    ScrollTrigger.create({
-      trigger: '.marquee-wrap',
-      start: 'top bottom',
-      end: 'bottom top',
-      onUpdate: self => {
-        const speed = 28 - self.getVelocity() / 200;
-        gsap.to(marqueeTrack, { animationDuration: `${Math.max(8, speed)}s`, overwrite: 'auto' });
-      }
-    });
-  }
+  /* Hero orbs parallax */
+  gsap.to('.hero-orb1', { y: -100, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 } });
+  gsap.to('.hero-orb2', { y: -60,  ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 } });
 
-  /* ===== STATS — stagger in ===== */
-  gsap.from('.stat-box', {
-    opacity: 0, y: 50, stagger: 0.12, duration: 0.9, ease: 'power3.out',
-    scrollTrigger: { trigger: '#stats', start: 'top 80%' }
+  /* Hero content fades as you scroll away */
+  gsap.to('.hero-content', {
+    opacity: 0, y: -60, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'center top', end: 'bottom top', scrub: .8 }
   });
 
-  /* ===== ABOUT ===== */
-  const aboutVisual = document.querySelector('.about-visual');
-  const aboutText = document.querySelector('.about-text');
+  /* ===== STATS ===== */
+  gsap.from('.stat-box', {
+    opacity: 0, y: 40, stagger: .12, duration: .9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#stats', start: 'top 82%' }
+  });
 
-  if (aboutVisual) {
-    gsap.from(aboutVisual, {
-      opacity: 0, y: 80, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '#about', start: 'top 80%' }
-    });
-    gsap.from('.about-photo-badge', {
-      opacity: 0, scale: 0.7, duration: 0.8, delay: 0.5, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: '#about', start: 'top 80%' }
-    });
-    gsap.from('.about-card', {
-      opacity: 0, x: 30, duration: 0.8, delay: 0.6, ease: 'power3.out',
-      scrollTrigger: { trigger: '#about', start: 'top 80%' }
+  /* ===== ABOUT photo + text ===== */
+  gsap.from('.about-photo-side', {
+    opacity: 0, x: -60, duration: 1.2, ease: 'power3.out',
+    scrollTrigger: { trigger: '#about', start: 'top 78%' }
+  });
+  gsap.from('.about-photo-badge', {
+    opacity: 0, scale: .75, duration: .9, delay: .3, ease: 'back.out(1.5)',
+    scrollTrigger: { trigger: '#about', start: 'top 78%' }
+  });
+
+  const aboutH2 = document.querySelector('.about-text-side .h2');
+  if (aboutH2) {
+    const words = splitWords(aboutH2);
+    gsap.from(words, {
+      opacity: 0, y: 35, stagger: .05, duration: .8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.about-text-side', start: 'top 80%' }
     });
   }
-
-  if (aboutText) {
-    const aboutH2 = aboutText.querySelector('.h2');
-    if (aboutH2) {
-      const words = splitWords(aboutH2);
-      gsap.from(words, {
-        opacity: 0, y: 40, stagger: 0.05, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: aboutText, start: 'top 80%' }
-      });
-    }
-    gsap.from(aboutText.querySelectorAll('.body-text, .values, .founder-pill, .btn'), {
-      opacity: 0, y: 30, stagger: 0.12, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: aboutText, start: 'top 75%' }
-    });
-  }
+  gsap.from('.about-text-side .gold-rule, .about-text-side p, .values, .founder-pill, .about-text-side .btn', {
+    opacity: 0, y: 25, stagger: .1, duration: .8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-text-side', start: 'top 78%' }
+  });
 
   /* ===== SERVICES heading ===== */
-  const servicesHead = document.querySelector('.services-head');
-  if (servicesHead) {
-    const h2 = servicesHead.querySelector('.h2');
-    if (h2) splitWords(h2);
-    gsap.from(servicesHead.querySelectorAll('.eyebrow, .word-inner'), {
-      opacity: 0, y: 40, stagger: 0.04, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: servicesHead, start: 'top 80%' }
+  const svcH2 = document.querySelector('.services-head .h2');
+  if (svcH2) {
+    const words = splitWords(svcH2);
+    gsap.from(words, {
+      opacity: 0, y: 30, stagger: .05, duration: .8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.services-head', start: 'top 82%' }
     });
   }
 
-  /* ===== BENTO CARDS — stagger from bottom ===== */
-  gsap.from('.bento-card', {
-    opacity: 0, y: 60, scale: 0.96, stagger: 0.08, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: { trigger: '.bento', start: 'top 80%' }
+  /* Services rows — slide from side */
+  document.querySelectorAll('.svc-item').forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0, x: document.documentElement.dir === 'rtl' ? 40 : -40,
+      duration: .7, delay: i * .06, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
   });
 
-  /* ===== WHY heading ===== */
-  const whyTop = document.querySelector('.why-top');
-  if (whyTop) {
-    const h2 = whyTop.querySelector('.h2');
-    if (h2) {
-      const words = splitWords(h2);
-      gsap.from(words, {
-        opacity: 0, y: 40, stagger: 0.06, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: whyTop, start: 'top 80%' }
-      });
-    }
+  /* ===== WHY ===== */
+  const whyH2 = document.querySelector('.why-top .h2');
+  if (whyH2) {
+    const words = splitWords(whyH2);
+    gsap.from(words, {
+      opacity: 0, y: 35, stagger: .06, duration: .9, ease: 'power3.out',
+      scrollTrigger: { trigger: '.why-top', start: 'top 82%' }
+    });
   }
-
-  /* ===== WHY items ===== */
   gsap.from('.why-item', {
-    opacity: 0, y: 50, stagger: 0.15, duration: 0.9, ease: 'power3.out',
-    scrollTrigger: { trigger: '.why-grid', start: 'top 80%' }
+    opacity: 0, y: 50, stagger: .14, duration: .9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.why-grid', start: 'top 82%' }
   });
-
-  /* ===== WHY big number scrub ===== */
-  const whyBgText = document.querySelector('.why-bg-text');
-  if (whyBgText) {
-    gsap.fromTo(whyBgText,
-      { xPercent: -5 },
-      { xPercent: 5, ease: 'none',
-        scrollTrigger: { trigger: '#why', start: 'top bottom', end: 'bottom top', scrub: 1 }
-      }
-    );
-  }
+  /* WHY background word scrub */
+  gsap.fromTo('.why-bg-word',
+    { xPercent: -8 },
+    { xPercent: 8, ease: 'none',
+      scrollTrigger: { trigger: '#why', start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+    }
+  );
 
   /* ===== DARIMPO ===== */
   gsap.from('.darimpo-section', {
-    opacity: 0, y: 60, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.darimpo-section', start: 'top 80%' }
+    opacity: 0, y: 55, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.darimpo-section', start: 'top 82%' }
   });
   gsap.from('.device-shell', {
-    opacity: 0, y: 40, rotateY: -8, duration: 1.1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.darimpo-section', start: 'top 75%' }
+    opacity: 0, y: 40, rotateY: -10, duration: 1.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.darimpo-section', start: 'top 78%' }
   });
   gsap.from('.dp-feat', {
-    opacity: 0, x: -20, stagger: 0.1, duration: 0.6, ease: 'power3.out',
-    scrollTrigger: { trigger: '.darimpo-section', start: 'top 70%' }
+    opacity: 0, x: -18, stagger: .09, duration: .6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.dp-features', start: 'top 82%' }
   });
 
   /* ===== GALLERY ===== */
-  gsap.from('.gi', {
-    opacity: 0, scale: 0.94, stagger: 0.12, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.gallery-grid', start: 'top 80%' }
+  gsap.from('.gallery-head .eyebrow, .gallery-head .h2', {
+    opacity: 0, y: 25, stagger: .12, duration: .8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.gallery-head', start: 'top 84%' }
   });
-
-  /* Parallax inside gallery big image */
-  const giBig = document.querySelector('.gi.big img');
-  if (giBig) {
-    gsap.to(giBig, {
-      yPercent: 12,
-      ease: 'none',
+  gsap.from('.gi', {
+    opacity: 0, scale: .95, stagger: .1, duration: 1.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.gallery-grid', start: 'top 82%' }
+  });
+  /* Parallax inside big gallery image */
+  const giBigImg = document.querySelector('.gi.big img');
+  if (giBigImg) {
+    gsap.to(giBigImg, {
+      yPercent: 12, ease: 'none',
       scrollTrigger: { trigger: '.gi.big', start: 'top bottom', end: 'bottom top', scrub: true }
     });
   }
 
-  /* ===== TESTIMONIALS heading ===== */
-  const testiHead = document.querySelector('.testi-head');
-  if (testiHead) {
-    const h2 = testiHead.querySelector('.h2');
-    if (h2) {
-      const words = splitWords(h2);
-      gsap.from(words, {
-        opacity: 0, y: 40, stagger: 0.06, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: testiHead, start: 'top 80%' }
-      });
-    }
+  /* ===== TESTIMONIALS ===== */
+  const testiH2 = document.querySelector('.testi-head .h2');
+  if (testiH2) {
+    const words = splitWords(testiH2);
+    gsap.from(words, {
+      opacity: 0, y: 30, stagger: .06, duration: .9, ease: 'power3.out',
+      scrollTrigger: { trigger: '.testi-head', start: 'top 82%' }
+    });
   }
   gsap.from('.testi-quote', {
-    opacity: 0, scale: 0.7, duration: 1, ease: 'back.out(1.2)',
-    scrollTrigger: { trigger: '#testimonials', start: 'top 80%' }
+    opacity: 0, scale: .6, duration: 1, ease: 'back.out(1.3)',
+    scrollTrigger: { trigger: '#testimonials', start: 'top 82%' }
   });
 
   /* ===== CONTACT ===== */
-  const contactLeft = document.querySelector('.contact-left');
-  const contactRight = document.querySelector('.contact-right');
-  if (contactLeft) {
-    const h2 = contactLeft.querySelector('.h2');
-    if (h2) {
-      const words = splitWords(h2);
-      gsap.from(words, {
-        opacity: 0, y: 40, stagger: 0.06, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: contactLeft, start: 'top 80%' }
-      });
-    }
-    gsap.from(contactLeft.querySelectorAll('.gold-rule, .body-text, .ci-row, .socials'), {
-      opacity: 0, y: 30, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: contactLeft, start: 'top 75%' }
+  const contactH2 = document.querySelector('.contact-left .h2');
+  if (contactH2) {
+    const words = splitWords(contactH2);
+    gsap.from(words, {
+      opacity: 0, y: 30, stagger: .06, duration: .9, ease: 'power3.out',
+      scrollTrigger: { trigger: '.contact-left', start: 'top 82%' }
     });
   }
-  if (contactRight) {
-    gsap.from(contactRight, {
-      opacity: 0, x: 50, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: contactRight, start: 'top 80%' }
-    });
-  }
+  gsap.from('.contact-left .gold-rule, .contact-left p, .ci-row, .socials', {
+    opacity: 0, y: 22, stagger: .09, duration: .8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact-left', start: 'top 78%' }
+  });
+  gsap.from('.contact-right', {
+    opacity: 0, x: 50, duration: 1.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#contact', start: 'top 80%' }
+  });
 
   /* ===== FOOTER ===== */
   gsap.from('.footer-brand, .footer-col', {
-    opacity: 0, y: 30, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: { trigger: '#footer', start: 'top 90%' }
-  });
-
-  /* ===== SECTION EYEBROWS (all) ===== */
-  document.querySelectorAll('.eyebrow').forEach(el => {
-    gsap.from(el, {
-      opacity: 0, x: -20, duration: 0.7, ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 85%' }
-    });
+    opacity: 0, y: 25, stagger: .1, duration: .8, ease: 'power3.out',
+    scrollTrigger: { trigger: '#footer', start: 'top 92%' }
   });
 
   /* ===== GOLD RULES ===== */
   document.querySelectorAll('.gold-rule').forEach(el => {
     gsap.from(el, {
-      scaleX: 0, duration: 0.8, ease: 'power3.out', transformOrigin: 'left center',
-      scrollTrigger: { trigger: el, start: 'top 85%' }
+      scaleX: 0, duration: .9, ease: 'power3.out', transformOrigin: 'left center',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
     });
   });
 
-  /* ===== PIN HERO on scroll start (subtle) ===== */
-  ScrollTrigger.create({
-    trigger: '#hero',
-    start: 'top top',
-    end: '+=200',
-    onLeave: () => gsap.to('.hero-content', { opacity: 0.4, y: -30, duration: 0.5 }),
-    onEnterBack: () => gsap.to('.hero-content', { opacity: 1, y: 0, duration: 0.5 })
-  });
-
-  /* Disable .reveal CSS fallback since GSAP handles everything */
+  /* Disable CSS reveal fallback — GSAP handles everything */
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
 });
