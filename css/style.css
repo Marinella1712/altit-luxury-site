@@ -943,6 +943,22 @@ body.lang-he .dm-title { margin-right: 0; margin-left: auto; }
 .gallery-icon { font-size: 3rem; }
 
 /* ===== WHATSAPP BUTTON ===== */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: var(--transition);
+}
+.social-link.instagram {
+  color: var(--gray-text);
+}
+.social-link.instagram:hover {
+  color: #E1306C;
+}
+
 .btn-whatsapp {
   display: inline-flex;
   align-items: center;
