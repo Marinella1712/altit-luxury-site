@@ -75,9 +75,9 @@ body::after {
 .word-inner { display: inline-block; }
 .char  { display: inline-block; }
 
-/* ===== REVEAL ===== */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d,0s); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ===== REVEAL — GSAP gère tout, pas de hide CSS ===== */
+.reveal { opacity: 1; transform: none; }
+body.js-ready .reveal { opacity: 1; }
 
 /* ===== GRADIENT TEXT ===== */
 .gradient-text {
