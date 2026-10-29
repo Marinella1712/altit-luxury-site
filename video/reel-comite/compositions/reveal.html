@@ -144,7 +144,8 @@
       line-height: 150px;
       white-space: nowrap;
     }
-    #rv-title span {
+    #rv-title .rv-word,
+    #rv-title .rv-l {
       display: inline-block;
     }
     #rv-sub {
@@ -167,7 +168,7 @@
           <img id="rv-img" src="assets/img/building-entrance.jpeg" alt="" />
         </div>
       </div>
-      <div id="rv-title"><span id="rv-w1">אלטיט</span> <span id="rv-w2">לוקסורי</span></div>
+      <div id="rv-title" data-hold><span class="rv-word"><span class="rv-l">א</span><span class="rv-l">ל</span><span class="rv-l">ט</span><span class="rv-l">י</span><span class="rv-l">ט</span></span> <span class="rv-word"><span class="rv-l">ל</span><span class="rv-l">ו</span><span class="rv-l">ק</span><span class="rv-l">ס</span><span class="rv-l">ו</span><span class="rv-l">ר</span><span class="rv-l">י</span></span></div>
       <div id="rv-sub">ניהול ואחזקת מבנים — אילת</div>
     </div>
   </div>
@@ -188,9 +189,11 @@
       tl.to("#rv-photo", { clipPath: "inset(640px 0px 0px 0px round 0px)", duration: 0.5, ease: "power3.inOut" }, 1.85);
 
       // Name per word, then the line under it.
-      tl.fromTo("#rv-w1", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 2.2);
-      tl.fromTo("#rv-w2", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 2.27);
-      tl.fromTo("#rv-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 2.45);
+      // The name arrives letter by letter, right to left as it reads.
+      gsap.utils.toArray("#rv-title .rv-l").forEach((l, i) => {
+        tl.fromTo(l, { opacity: 0, filter: "blur(5px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, 2.15 + i * 0.045);
+      });
+      tl.fromTo("#rv-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 2.75);
 
       // Vertical whip into the numbers.
       tl.to("#rv-stage", { y: -520, filter: "blur(18px)", duration: 0.25, ease: "power3.in" }, 3.85);

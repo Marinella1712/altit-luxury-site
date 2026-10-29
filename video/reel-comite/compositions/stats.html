@@ -127,6 +127,15 @@
       text-align: right;
       white-space: nowrap;
     }
+    .st-c {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+      height: 420px;
+    }
+    .st-ci {
+      display: inline-block;
+    }
     .st-l {
       display: block;
       margin-top: 40px;
@@ -150,46 +159,58 @@
     <div class="st-g" id="st-g1"><span class="st-n">6+</span><span class="st-l" id="st-l1">שנות ניסיון בשטח</span></div>
     <div class="st-g" id="st-g2"><span class="st-n" id="st-n2">10+</span><span class="st-l" id="st-l2">בניינים בניהול</span></div>
     <div class="st-g" id="st-g3"><span class="st-n" id="st-n3">98%</span><span class="st-l" id="st-l3">שביעות רצון</span></div>
-    <div class="st-g" id="st-g4"><span class="st-n">24/7</span><span class="st-l" id="st-l4">זמינות לחירום</span></div>
+    <div class="st-g" id="st-g4"><span class="st-n" id="st-n4"><span class="st-c"><span class="st-ci">2</span></span><span class="st-c"><span class="st-ci">4</span></span><span class="st-c"><span class="st-ci">/</span></span><span class="st-c"><span class="st-ci">7</span></span></span><span class="st-l" id="st-l4">זמינות לחירום</span></div>
   </div>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       const lineIn = (sel, t) =>
-        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, t);
+        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, t);
       const swapOut = (sel, t) =>
         tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, t);
       const flood = (color, t) =>
         tl.to("#st-ground", { backgroundColor: color, duration: 0.3, ease: "power2.inOut" }, t);
+      const count = (sel, from, to, suffix, t, dur) => {
+        const el = document.querySelector(sel);
+        const c = { v: from };
+        tl.fromTo(c, { v: from }, {
+          v: to, duration: dur, ease: "power3.out",
+          onUpdate: () => { el.textContent = Math.round(c.v) + suffix; },
+        }, t);
+      };
 
       // 6+ lands out of the whip from the reveal.
-      tl.fromTo("#st-g1", { opacity: 1, y: 520, filter: "blur(18px)" }, { y: 0, filter: "blur(0px)", duration: 0.32, ease: "expo.out" }, 0);
+      tl.fromTo("#st-g1", { opacity: 1, y: 520, filter: "blur(18px)" }, { y: 0, filter: "blur(0px)", duration: 0.34, ease: "expo.out" }, 0);
       lineIn("#st-l1", 0.06);
-      swapOut("#st-g1", 1.12);
+      swapOut("#st-g1", 1.3);
 
-      // 10+ on cream.
-      flood("#F4EFE8", 1.05);
-      tl.set("#st-g2", { opacity: 1 }, 1.2);
-      tl.fromTo("#st-n2", { opacity: 0, scale: 1.12, transformOrigin: "100% 50%", filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25, ease: "expo.out" }, 1.2);
-      lineIn("#st-l2", 1.35);
-      swapOut("#st-g2", 2.25);
+      // 10+ counts up on cream.
+      flood("#F4EFE8", 1.25);
+      tl.set("#st-g2", { opacity: 1 }, 1.4);
+      tl.fromTo("#st-n2", { opacity: 0, scale: 1.1, transformOrigin: "100% 50%", filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25, ease: "expo.out" }, 1.4);
+      count("#st-n2", 1, 10, "+", 1.4, 0.5);
+      lineIn("#st-l2", 1.55);
+      swapOut("#st-g2", 2.65);
 
       // 98% counts up on gold.
-      flood("#C9A87C", 2.25);
-      tl.set("#st-g3", { opacity: 1 }, 2.4);
-      const n3 = document.querySelector("#st-n3");
-      const counter = { v: 10 };
-      tl.fromTo(counter, { v: 10 }, {
-        v: 98, duration: 0.55, ease: "power3.out",
-        onUpdate: () => { n3.textContent = Math.round(counter.v) + "%"; },
-      }, 2.4);
-      lineIn("#st-l3", 2.55);
-      tl.to("#st-g3", { x: -420, filter: "blur(16px)", opacity: 0, duration: 0.2, ease: "power3.in" }, 3.45);
+      flood("#C9A87C", 2.65);
+      tl.set("#st-g3", { opacity: 1 }, 2.8);
+      count("#st-n3", 50, 98, "%", 2.8, 0.6);
+      lineIn("#st-l3", 2.95);
+      tl.to("#st-g3", { x: -420, filter: "blur(16px)", opacity: 0, duration: 0.2, ease: "power3.in" }, 4.05);
 
-      // 24/7 whips in from the same direction on black.
-      flood("#09090F", 3.45);
-      tl.fromTo("#st-g4", { opacity: 0, x: 420, filter: "blur(16px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.28, ease: "expo.out" }, 3.6);
-      lineIn("#st-l4", 3.8);
+      // 24/7 rises character by character out of its own baseline on black.
+      flood("#09090F", 4.05);
+      tl.set("#st-g4", { opacity: 1 }, 4.2);
+      gsap.utils.toArray("#st-n4 .st-ci").forEach((c, i) => {
+        tl.fromTo(c, { yPercent: 105 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 4.2 + i * 0.06);
+      });
+      lineIn("#st-l4", 4.4);
+
+      // Zoom through the number into the cream of the next scene.
+      tl.to("#st-l4", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 5.2);
+      tl.to("#st-n4", { scale: 7, transformOrigin: "62% 50%", opacity: 0, duration: 0.4, ease: "power3.in" }, 5.2);
+      flood("#F4EFE8", 5.3);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["stats"] = tl;

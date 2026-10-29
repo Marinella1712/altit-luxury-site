@@ -51,7 +51,7 @@
     #cl-ground {
       position: absolute;
       inset: 0;
-      background: var(--color-black, #09090f);
+      background: var(--color-cream, #f4efe8);
     }
     #cl-photo {
       position: absolute;
@@ -106,10 +106,9 @@
     (function () {
       const tl = gsap.timeline({ paused: true });
 
-      // Black floods to cream; the building rises under the line.
-      tl.to("#cl-ground", { backgroundColor: "#F4EFE8", duration: 0.35, ease: "power2.inOut" }, 0);
-      tl.fromTo("#cl-photo", { clipPath: "inset(1920px 0px 0px 0px)" }, { clipPath: "inset(860px 0px 0px 0px)", duration: 0.55, ease: "power3.out" }, 0.1);
-      tl.fromTo("#cl-img", { x: 0 }, { x: 120, duration: 2.4, ease: "none" }, 0);
+      // Out of the zoom-through on cream; the building rises under the line.
+      tl.fromTo("#cl-photo", { clipPath: "inset(1920px 0px 0px 0px)" }, { clipPath: "inset(860px 0px 0px 0px)", duration: 0.6, ease: "power3.out" }, 0.05);
+      tl.fromTo("#cl-img", { x: 0 }, { x: 120, duration: 2.6, ease: "none" }, 0);
 
       // Words go from light grey to ink, one after another; the second line keeps its gold.
       const words = gsap.utils.toArray("#cl-text .cl-w");
@@ -118,8 +117,8 @@
       });
 
       // Clear the stage for the end card: words blur out, the photo drops away.
-      tl.to("#cl-text", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in" }, 2.2);
-      tl.to("#cl-photo", { clipPath: "inset(1920px 0px 0px 0px)", duration: 0.3, ease: "power3.in" }, 2.08);
+      tl.to("#cl-text", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in" }, 2.4);
+      tl.to("#cl-photo", { clipPath: "inset(1920px 0px 0px 0px)", duration: 0.3, ease: "power3.in" }, 2.28);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["claim"] = tl;
