@@ -1,0 +1,202 @@
+<template>
+  <style>
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-400-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-400-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-500-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-500-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-700-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-700-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 800;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-800-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 800;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-800-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-hebrew-500-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-latin-500-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-hebrew-700-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-latin-700-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 900;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-hebrew-900-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Frank Ruhl Libre";
+        font-weight: 900;
+        font-display: block;
+        src: url("assets/fonts/frank-ruhl-libre-latin-900-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      direction: rtl;
+    }
+    #rv-ground {
+      position: absolute;
+      inset: 0;
+      background: var(--color-gold, #c9a87c);
+    }
+    #rv-stage {
+      position: absolute;
+      inset: 0;
+    }
+    #rv-photo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      clip-path: inset(885px 230px 885px 230px round 28px);
+    }
+    #rv-cam {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    #rv-img {
+      position: absolute;
+      left: -180px;
+      top: 0;
+      width: 1440px;
+      height: 1920px;
+    }
+    #rv-title {
+      position: absolute;
+      right: 90px;
+      top: 228px;
+      color: var(--color-ink, #1a1a24);
+      font-family: "Frank Ruhl Libre", serif;
+      font-weight: 900;
+      font-size: 132px;
+      line-height: 150px;
+      white-space: nowrap;
+    }
+    #rv-title span {
+      display: inline-block;
+    }
+    #rv-sub {
+      position: absolute;
+      right: 94px;
+      top: 404px;
+      color: var(--color-gold-deep, #a07b4f);
+      font-family: "Heebo", sans-serif;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 60px;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="reveal" data-width="1080" data-height="1920">
+    <div id="rv-ground"></div>
+    <div id="rv-stage">
+      <div id="rv-photo">
+        <div id="rv-cam">
+          <img id="rv-img" src="assets/img/building-entrance.jpeg" alt="" />
+        </div>
+      </div>
+      <div id="rv-title"><span id="rv-w1">אלטיט</span> <span id="rv-w2">לוקסורי</span></div>
+      <div id="rv-sub">ניהול ואחזקת מבנים — אילת</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // The plaque opens inside the gold bubble's rectangle, then the camera pulls back to the entrance.
+      tl.fromTo("#rv-photo",
+        { clipPath: "inset(885px 230px 885px 230px round 28px)" },
+        { clipPath: "inset(0px 0px 0px 0px round 0px)", duration: 0.9, ease: "power3.inOut" }, 0.1);
+      tl.fromTo("#rv-cam",
+        { transformOrigin: "393.6px 948px", scale: 2.6, x: 146.4, y: 12 },
+        { scale: 1, x: 0, y: 0, duration: 2.1, ease: "power2.inOut" }, 0);
+
+      // The photo's top edge descends; the ground floods to cream under the name.
+      tl.to("#rv-ground", { backgroundColor: "#F4EFE8", duration: 0.4, ease: "power2.inOut" }, 1.8);
+      tl.to("#rv-photo", { clipPath: "inset(640px 0px 0px 0px round 0px)", duration: 0.5, ease: "power3.inOut" }, 1.85);
+
+      // Name per word, then the line under it.
+      tl.fromTo("#rv-w1", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 2.2);
+      tl.fromTo("#rv-w2", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 2.27);
+      tl.fromTo("#rv-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 2.45);
+
+      // Vertical whip into the numbers.
+      tl.to("#rv-stage", { y: -520, filter: "blur(18px)", duration: 0.25, ease: "power3.in" }, 3.85);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["reveal"] = tl;
+    })();
+  </script>
+</template>

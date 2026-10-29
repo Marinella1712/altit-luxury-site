@@ -1,0 +1,312 @@
+<template>
+  <style>
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-400-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-400-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-500-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 500;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-500-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-700-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-700-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 800;
+        font-display: block;
+        src: url("assets/fonts/heebo-hebrew-800-normal.woff2") format("woff2");
+        unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+      }
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 800;
+        font-display: block;
+        src: url("assets/fonts/heebo-latin-800-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-200B, U+2011-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #efe7da;
+      font-family: "Heebo", sans-serif;
+      direction: rtl;
+    }
+    #chat-cam {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      background: #efe7da;
+    }
+    #chat-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 300px;
+      background: var(--color-black, #09090f);
+      z-index: 5;
+    }
+    #chat-avatar {
+      position: absolute;
+      right: 48px;
+      top: 176px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #3a3a46;
+      color: #f4efe8;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 96px;
+      text-align: center;
+    }
+    #chat-title {
+      position: absolute;
+      right: 170px;
+      top: 170px;
+      color: #f4efe8;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 64px;
+    }
+    #chat-members {
+      position: absolute;
+      right: 170px;
+      top: 236px;
+      color: #b9b6ae;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 40px;
+    }
+    #chat-col {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      z-index: 2;
+    }
+    .slot {
+      position: relative;
+      height: 150px;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+    }
+    .slot.out {
+      justify-content: flex-end;
+    }
+    .msg {
+      height: 150px;
+      padding: 18px 30px 0 30px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+      white-space: nowrap;
+      position: relative;
+    }
+    .slot.in .msg {
+      border-top-right-radius: 6px;
+    }
+    .slot.out .msg {
+      background: #ddf2c9;
+      border-top-left-radius: 6px;
+      padding-top: 34px;
+    }
+    .who {
+      display: block;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 40px;
+    }
+    .txt {
+      display: block;
+      color: #111b21;
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 56px;
+      padding-left: 92px;
+    }
+    .time {
+      position: absolute;
+      left: 22px;
+      bottom: 14px;
+      color: #667781;
+      font-size: 28px;
+      line-height: 30px;
+      direction: ltr;
+    }
+    #chat-gold {
+      background: var(--color-gold, #c9a87c);
+    }
+    #chat-gold .who,
+    #chat-gold .txt {
+      color: var(--color-black, #09090f);
+    }
+    #chat-gold .txt {
+      font-weight: 700;
+      font-size: 46px;
+    }
+    #chat-gold .time {
+      color: rgba(9, 9, 15, 0.6);
+    }
+    #chat-typing {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 150px;
+      padding: 18px 30px 0 30px;
+      border-radius: 28px;
+      border-top-right-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+    }
+    #chat-typing .who {
+      color: var(--color-gold-deep, #a07b4f);
+    }
+    .dots {
+      display: flex;
+      gap: 12px;
+      height: 56px;
+      align-items: center;
+      direction: ltr;
+    }
+    .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #8696a0;
+    }
+    #chat-input {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      top: 1720px;
+      height: 112px;
+      border-radius: 56px;
+      background: #ffffff;
+      color: #8696a0;
+      font-size: 40px;
+      line-height: 112px;
+      padding-right: 48px;
+    }
+  </style>
+  <div id="root" data-composition-id="chat" data-width="1080" data-height="1920">
+    <div id="chat-cam">
+      <div id="chat-header">
+        <div id="chat-avatar" data-layout-allow-overlap>ב</div>
+        <div id="chat-title" data-layout-allow-overlap>ועד הבית</div>
+        <div id="chat-members">14 משתתפים</div>
+      </div>
+
+      <div id="chat-col">
+        <div class="slot in"><div class="msg" id="chat-m1"><span class="who" style="color: #c0392b">דירה 4</span><span class="txt">המעלית שוב תקועה!</span><span class="time">07:42</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m2"><span class="who" style="color: #1f7a8c">דירה 9</span><span class="txt">מי מתקשר לטכנאי?</span><span class="time">07:43</span></div></div>
+        <div class="slot out"><div class="msg" id="chat-m3"><span class="txt">לא אני, התקשרתי בפעם הקודמת</span><span class="time">07:43</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m4"><span class="who" style="color: #8e44ad">דירה 2</span><span class="txt">עוד לא כולם שילמו את דמי הוועד...</span><span class="time">07:45</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m5"><span class="who" style="color: #d35400">דירה 7</span><span class="txt">הלובי מלוכלך כבר שבוע</span><span class="time">07:46</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m6"><span class="who" style="color: #2e7d32">דירה 11</span><span class="txt">והאספה נדחתה שוב</span><span class="time">07:46</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m7"><span class="who" style="color: #c0392b">דירה 4</span><span class="txt">מישהו??</span><span class="time">07:47</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m8"><span class="who" style="color: #1f7a8c">דירה 9</span><span class="txt">???</span><span class="time">07:47</span></div></div>
+        <div class="slot in"><div class="msg" id="chat-m9"><span class="who" style="color: #8e44ad">דירה 2</span><span class="txt">המעלית!!!</span><span class="time">07:47</span></div></div>
+        <div class="slot in" id="chat-slot-gold">
+          <div id="chat-typing"><span class="who">אלטיט לוקסורי</span><div class="dots"><div class="dot" id="chat-d1"></div><div class="dot" id="chat-d2"></div><div class="dot" id="chat-d3"></div></div></div>
+          <div class="msg" id="chat-gold"><span class="who">אלטיט לוקסורי</span><span class="txt" id="chat-gold-txt">מעכשיו, אנחנו מטפלים בזה.</span><span class="time">07:48</span></div>
+        </div>
+      </div>
+
+      <div id="chat-input" data-layout-ignore>הודעה</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const STEP = 168; // slot height 150 + gap 18
+      const N = 10; // slots in the column
+      const colY = (latest) => (N - latest) * STEP;
+      const tl = gsap.timeline({ paused: true });
+
+      // Frame 0: punched in on the first message (the hook), the rest of the thread waiting below.
+      gsap.set("#chat-col", { y: colY(1) });
+      gsap.set("#chat-cam", { transformOrigin: "0 0", scale: 1.7, x: -777.5, y: -1322.5 });
+      gsap.set(["#chat-m2", "#chat-m3", "#chat-m4", "#chat-m5", "#chat-m6", "#chat-m7", "#chat-m8", "#chat-m9", "#chat-gold", "#chat-typing"], { opacity: 0 });
+
+      // Pull back to the whole group chat.
+      tl.fromTo("#chat-cam", { scale: 1.7, x: -777.5, y: -1322.5 }, { scale: 1, x: 0, y: 0, duration: 0.8, ease: "power2.inOut" }, 1.6);
+
+      // Messages pile up, faster and faster.
+      const arrivals = [
+        ["#chat-m2", 2.3, "top right"],
+        ["#chat-m3", 2.85, "top left"],
+        ["#chat-m4", 3.35, "top right"],
+        ["#chat-m5", 3.8, "top right"],
+        ["#chat-m6", 4.2, "top right"],
+        ["#chat-m7", 4.5, "top right"],
+        ["#chat-m8", 4.7, "top right"],
+        ["#chat-m9", 4.85, "top right"],
+      ];
+      arrivals.forEach(([sel, t, origin], i) => {
+        const k = i + 2;
+        tl.fromTo("#chat-col", { y: colY(k - 1) }, { y: colY(k), duration: 0.22, ease: "power3.out", immediateRender: false }, t);
+        tl.fromTo(sel, { opacity: 0, scale: 0.75, transformOrigin: origin }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out", immediateRender: false }, t);
+      });
+
+      // Altit is typing…
+      tl.fromTo("#chat-col", { y: colY(9) }, { y: colY(10), duration: 0.22, ease: "power3.out", immediateRender: false }, 5.0);
+      tl.fromTo("#chat-typing", { opacity: 0, scale: 0.75, transformOrigin: "top right" }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out", immediateRender: false }, 5.0);
+      ["#chat-d1", "#chat-d2", "#chat-d3"].forEach((d, i) => {
+        tl.fromTo(d, { y: 0 }, { y: -10, duration: 0.15, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 5.1 + i * 0.08);
+      });
+
+      // …and answers.
+      tl.to("#chat-typing", { opacity: 0, duration: 0.06 }, 5.6);
+      tl.fromTo("#chat-gold", { opacity: 0, scale: 0.75, transformOrigin: "top right" }, { opacity: 1, scale: 1, duration: 0.14, ease: "power2.out", immediateRender: false }, 5.6);
+      tl.fromTo("#chat-cam", { scale: 1, x: 0, y: 0 }, { scale: 1.35, x: -434.7, y: -753.75, duration: 0.6, ease: "power2.inOut", immediateRender: false }, 5.75);
+
+      // The gold bubble becomes the next world.
+      tl.to("#chat-header", { opacity: 0, duration: 0.2 }, 7.15);
+      tl.to("#chat-gold-txt, #chat-gold .who, #chat-gold .time", { opacity: 0, duration: 0.15 }, 7.2);
+      tl.fromTo("#chat-gold", { scale: 1, transformOrigin: "50% 50%" }, { scale: 16, duration: 0.65, ease: "power2.in", immediateRender: false }, 7.2);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["chat"] = tl;
+    })();
+  </script>
+</template>

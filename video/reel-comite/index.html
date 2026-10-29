@@ -1,0 +1,94 @@
+<!doctype html>
+<html
+  lang="he"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"color-gold","type":"color","label":"Or","default":"#C9A87C"},
+    {"id":"color-gold-deep","type":"color","label":"Or foncé","default":"#A07B4F"},
+    {"id":"color-black","type":"color","label":"Noir","default":"#09090F"},
+    {"id":"color-cream","type":"color","label":"Crème","default":"#F4EFE8"},
+    {"id":"color-ink","type":"color","label":"Texte","default":"#1A1A24"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      :root {
+        --color-gold: #c9a87c;
+        --color-gold-deep: #a07b4f;
+        --color-black: #09090f;
+        --color-cream: #f4efe8;
+        --color-ink: #1a1a24;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--color-cream);
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="22.6"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="chat" data-composition-id="chat" data-composition-src="compositions/chat.html"
+        data-start="0" data-duration="7.9" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="reveal" data-composition-id="reveal" data-composition-src="compositions/reveal.html"
+        data-start="7.9" data-duration="4.1" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="stats" data-composition-id="stats" data-composition-src="compositions/stats.html"
+        data-start="12" data-duration="4.8" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="claim" data-composition-id="claim" data-composition-src="compositions/claim.html"
+        data-start="16.8" data-duration="2.4" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+      <div id="endcard" data-composition-id="endcard" data-composition-src="compositions/endcard.html"
+        data-start="19.2" data-duration="3.4" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920"></div>
+
+      <!-- Sound effects: each placed so its peak lands one frame after the picture. -->
+      <audio id="sfx-msg1" src="assets/sfx/notification.mp3" data-start="0" data-duration="1.6" data-track-index="3" data-volume="0.55"></audio>
+      <audio id="sfx-msg2" src="assets/sfx/pop.mp3" data-start="2.213" data-duration="0.6" data-track-index="3" data-volume="0.7"></audio>
+      <audio id="sfx-msg3" src="assets/sfx/pop.mp3" data-start="2.763" data-duration="0.6" data-track-index="4" data-volume="0.55"></audio>
+      <audio id="sfx-msg4" src="assets/sfx/pop.mp3" data-start="3.263" data-duration="0.6" data-track-index="3" data-volume="0.7"></audio>
+      <audio id="sfx-msg5" src="assets/sfx/pop.mp3" data-start="3.713" data-duration="0.6" data-track-index="4" data-volume="0.6"></audio>
+      <audio id="sfx-msg6" src="assets/sfx/pop.mp3" data-start="4.113" data-duration="0.5" data-track-index="3" data-volume="0.75"></audio>
+      <audio id="sfx-msg7" src="assets/sfx/pop.mp3" data-start="4.413" data-duration="0.4" data-track-index="5" data-volume="0.65"></audio>
+      <audio id="sfx-msg8" src="assets/sfx/pop.mp3" data-start="4.613" data-duration="0.4" data-track-index="3" data-volume="0.8"></audio>
+      <audio id="sfx-msg9" src="assets/sfx/pop.mp3" data-start="4.763" data-duration="0.5" data-track-index="4" data-volume="0.7"></audio>
+      <audio id="sfx-typing" src="assets/sfx/typing.mp3" data-start="5.0" data-duration="0.6" data-track-index="6" data-volume="0.35" data-fade-out="0.1"></audio>
+      <audio id="sfx-altit" src="assets/sfx/notification.mp3" data-start="5.55" data-duration="1.6" data-track-index="4" data-volume="0.7"></audio>
+      <audio id="sfx-grow" src="assets/sfx/whoosh.mp3" data-start="7.6" data-duration="0.57" data-track-index="3" data-volume="0.55"></audio>
+      <audio id="sfx-whip" src="assets/sfx/whoosh-short.mp3" data-start="11.85" data-duration="0.57" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="sfx-stat1" src="assets/sfx/pop.mp3" data-start="12.0" data-duration="0.5" data-track-index="3" data-volume="0.6"></audio>
+      <audio id="sfx-stat2" src="assets/sfx/pop.mp3" data-start="13.2" data-duration="0.5" data-track-index="3" data-volume="0.6"></audio>
+      <audio id="sfx-stat3" src="assets/sfx/pop.mp3" data-start="14.88" data-duration="0.5" data-track-index="3" data-volume="0.6"></audio>
+      <audio id="sfx-stat4" src="assets/sfx/whoosh-short.mp3" data-start="15.45" data-duration="0.57" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-phone" src="assets/sfx/impact-bass-1.mp3" data-start="20.26" data-duration="2.1" data-track-index="3" data-volume="0.4"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
