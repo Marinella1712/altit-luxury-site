@@ -6,3 +6,11 @@
 - No music bed: no music source in this environment. Add a track in the Instagram app when posting.
 - Weakest shot: the plaque at 2.6x zoom (7.9-8.6 s) is soft because the source photo is 1200 px wide; a higher-resolution photo of the plaque would fix it.
 - Fonts: Heebo + Frank Ruhl Libre from Fontsource (assets/fonts); GSAP vendored in assets/vendor (CDN blocked here).
+
+## v2 — readability and motion pass (24.8 s)
+- Chat text 44 -> 54 px; readable messages ~0.6 s apart, then a burst with a decaying camera shake.
+- Bubbles land on a spring (back.out 1.4); the typing bubble morphs into the gold answer (clip widen + colour).
+- Name per letter; 10+ and 98% count up; 24/7 rises per character from a mask; zoom through 24/7 into the claim.
+- Stats 1.4 s each; render-time motion blur on (data-motion-blur) for whips, camera moves and the zoom-through.
+- prompt-motion.com could not be read (blocked by the environment's network policy); techniques come from the HyperFrames motion reference.
+- check: 0 errors. line_unread on the per-letter name is a false positive (letters counted as words): marked data-hold.
