@@ -39,8 +39,8 @@ SHOTS:
   19.2-22.6  end  logo wipes in, "השקט לבעלי הדירות בבתים משותפים", 054-792-3868 lands (impact),
              holds 2.3 s.
 
-COPY:    all claims verbatim from the site's Hebrew i18n (hero_pre, stat1-4, why_title,
-         hero_tagline, phone). Chat lines are an illustrative scene, not claims.
+COPY:    v3: rewritten in natural spoken Israeli Hebrew (feedback: v2 read as a translation);
+         numbers and phone from the site. Chat lines are an illustrative scene, not claims.
 
 SAFE:    every word between y 168 and 1330; right edge of text <= 940 px below y 900 (action rail).
 

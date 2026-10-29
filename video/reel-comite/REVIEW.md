@@ -14,3 +14,6 @@
 - Stats 1.4 s each; render-time motion blur on (data-motion-blur) for whips, camera moves and the zoom-through.
 - prompt-motion.com could not be read (blocked by the environment's network policy); techniques come from the HyperFrames motion reference.
 - check: 0 errors. line_unread on the per-letter name is a false positive (letters counted as words): marked data-hold.
+
+## v3 — copy rewritten in natural Israeli Hebrew
+- Feedback: v2 wording read as translated. Group "דיירי הבניין", first names, colloquial lines; claim "בלי ועד בית, בלי כאבי ראש."; tagline "הבניין שלכם בידיים טובות". Numbers and phone unchanged.

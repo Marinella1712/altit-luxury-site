@@ -156,10 +156,10 @@
   </style>
   <div id="root" data-composition-id="stats" data-width="1080" data-height="1920">
     <div id="st-ground"></div>
-    <div class="st-g" id="st-g1"><span class="st-n">6+</span><span class="st-l" id="st-l1">שנות ניסיון בשטח</span></div>
-    <div class="st-g" id="st-g2"><span class="st-n" id="st-n2">10+</span><span class="st-l" id="st-l2">בניינים בניהול</span></div>
-    <div class="st-g" id="st-g3"><span class="st-n" id="st-n3">98%</span><span class="st-l" id="st-l3">שביעות רצון</span></div>
-    <div class="st-g" id="st-g4"><span class="st-n" id="st-n4"><span class="st-c"><span class="st-ci">2</span></span><span class="st-c"><span class="st-ci">4</span></span><span class="st-c"><span class="st-ci">/</span></span><span class="st-c"><span class="st-ci">7</span></span></span><span class="st-l" id="st-l4">זמינות לחירום</span></div>
+    <div class="st-g" id="st-g1"><span class="st-n">6+</span><span class="st-l" id="st-l1">שנות ניסיון</span></div>
+    <div class="st-g" id="st-g2"><span class="st-n" id="st-n2">10+</span><span class="st-l" id="st-l2">בניינים בניהול שלנו</span></div>
+    <div class="st-g" id="st-g3"><span class="st-n" id="st-n3">98%</span><span class="st-l" id="st-l3">לקוחות מרוצים</span></div>
+    <div class="st-g" id="st-g4"><span class="st-n" id="st-n4"><span class="st-c"><span class="st-ci">2</span></span><span class="st-c"><span class="st-ci">4</span></span><span class="st-c"><span class="st-ci">/</span></span><span class="st-c"><span class="st-ci">7</span></span></span><span class="st-l" id="st-l4">זמינים לכל תקלה</span></div>
   </div>
   <script>
     (function () {
@@ -205,10 +205,10 @@
       gsap.utils.toArray("#st-n4 .st-ci").forEach((c, i) => {
         tl.fromTo(c, { yPercent: 105 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 4.2 + i * 0.06);
       });
-      lineIn("#st-l4", 4.4);
+      lineIn("#st-l4", 4.22);
 
       // Zoom through the number into the cream of the next scene.
-      tl.to("#st-l4", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 5.2);
+      tl.to("#st-l4", { opacity: 0, filter: "blur(8px)", duration: 0.12, ease: "power2.in" }, 5.3);
       tl.to("#st-n4", { scale: 7, transformOrigin: "62% 50%", opacity: 0, duration: 0.4, ease: "power3.in" }, 5.2);
       flood("#F4EFE8", 5.3);
 
