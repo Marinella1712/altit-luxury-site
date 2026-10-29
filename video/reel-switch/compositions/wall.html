@@ -1,0 +1,489 @@
+<template>
+  <style>
+    @font-face { font-family: "Heebo"; font-weight: 500; font-display: block; src: url("assets/fonts/heebo-hebrew-500-normal.woff2") format("woff2"); unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+    @font-face { font-family: "Heebo"; font-weight: 500; font-display: block; src: url("assets/fonts/heebo-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193; }
+    @font-face { font-family: "Heebo"; font-weight: 700; font-display: block; src: url("assets/fonts/heebo-hebrew-700-normal.woff2") format("woff2"); unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+    @font-face { font-family: "Heebo"; font-weight: 700; font-display: block; src: url("assets/fonts/heebo-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193; }
+    @font-face { font-family: "Heebo"; font-weight: 800; font-display: block; src: url("assets/fonts/heebo-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193; }
+    @font-face { font-family: "Frank Ruhl Libre"; font-weight: 900; font-display: block; src: url("assets/fonts/frank-ruhl-libre-hebrew-900-normal.woff2") format("woff2"); unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+    @font-face { font-family: "Frank Ruhl Libre"; font-weight: 900; font-display: block; src: url("assets/fonts/frank-ruhl-libre-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #e8ded0;
+    }
+    /* The camera: everything in the room moves together. */
+    #cam {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      transform-origin: 0 0;
+    }
+
+    /* ---------- the room ---------- */
+    #wall {
+      position: absolute;
+      left: -200px;
+      top: -400px;
+      width: 1480px;
+      height: 2720px;
+      background:
+        radial-gradient(1300px 1500px at 120px 700px, rgba(255, 249, 238, 0.55), rgba(255, 249, 238, 0) 70%),
+        radial-gradient(1200px 900px at 1300px 2200px, rgba(120, 95, 70, 0.16), rgba(120, 95, 70, 0) 70%),
+        #e8ded0;
+    }
+    #window-light {
+      position: absolute;
+      left: -120px;
+      top: 180px;
+      width: 520px;
+      height: 1500px;
+      background: rgba(255, 247, 232, 0.42);
+      filter: blur(34px);
+      transform: skewY(-18deg);
+    }
+    #jamb {
+      position: absolute;
+      left: -200px;
+      top: 120px;
+      width: 236px;
+      height: 1680px;
+      background: #efe8de;
+      box-shadow: 10px 0 26px rgba(90, 70, 50, 0.18);
+    }
+    #ceiling {
+      position: absolute;
+      left: -200px;
+      top: -400px;
+      width: 1480px;
+      height: 520px;
+      background: linear-gradient(#f4f0ea 70%, #ebe4da);
+      box-shadow: 0 10px 28px rgba(90, 70, 50, 0.14);
+    }
+    /* A linear ceiling light, like the reference's ceiling bar; it lights with the switch. */
+    #fixture {
+      position: absolute;
+      left: 290px;
+      top: 64px;
+      width: 500px;
+      height: 46px;
+      border-radius: 23px;
+      background: #8a847d;
+      box-shadow: 0 8px 16px rgba(70, 50, 30, 0.22), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+    }
+    #fixture-lens {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 6px;
+      height: 12px;
+      border-radius: 6px;
+      background: #d6cfc4;
+    }
+    #fixture-on {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      background: #fff1d2;
+      box-shadow: 0 0 26px 10px rgba(255, 226, 170, 0.7);
+      opacity: 0;
+    }
+    #ceil-glow {
+      position: absolute;
+      left: 140px;
+      top: 110px;
+      width: 800px;
+      height: 260px;
+      background: radial-gradient(closest-side, rgba(255, 236, 196, 0.6), rgba(255, 236, 196, 0));
+      opacity: 0;
+    }
+    #floor {
+      position: absolute;
+      left: -200px;
+      top: 1800px;
+      width: 1480px;
+      height: 520px;
+      background: linear-gradient(#b89c80, #a8896c);
+      box-shadow: 0 -2px 0 rgba(80, 60, 40, 0.25);
+    }
+    #skirting {
+      position: absolute;
+      left: -200px;
+      top: 1774px;
+      width: 1480px;
+      height: 26px;
+      background: #f1ebe2;
+      box-shadow: 0 -3px 8px rgba(90, 70, 50, 0.12);
+    }
+
+    /* Light added when the switch is on. */
+    #room-on {
+      position: absolute;
+      left: -200px;
+      top: -400px;
+      width: 1480px;
+      height: 2720px;
+      background: radial-gradient(1100px 1300px at 740px 1000px, rgba(255, 238, 205, 0.5), rgba(255, 238, 205, 0) 72%);
+      opacity: 0;
+    }
+    #spill {
+      position: absolute;
+      left: 240px;
+      top: 120px;
+      width: 600px;
+      height: 360px;
+      background: radial-gradient(closest-side, rgba(218, 182, 120, 0.55), rgba(218, 182, 120, 0));
+      opacity: 0;
+    }
+
+    /* ---------- the switch ---------- */
+    #sw-plate {
+      position: absolute;
+      left: 328px;
+      top: 200px;
+      width: 424px;
+      height: 200px;
+      border-radius: 100px;
+      background: #dcd4c8;
+      box-shadow: 0 10px 22px rgba(70, 50, 30, 0.26), inset 0 2px 0 rgba(255, 255, 255, 0.7), inset 0 -3px 6px rgba(90, 70, 50, 0.18);
+    }
+    #sw-track {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 400px;
+      height: 176px;
+      border-radius: 88px;
+      background: #5b5b60;
+      box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.38), inset 0 -2px 0 rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    #sw-knob {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 140px;
+      height: 140px;
+      border-radius: 70px;
+      background: #8c8c90;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), inset 0 3px 0 rgba(255, 255, 255, 0.25);
+    }
+    #sw-knob-on {
+      position: absolute;
+      inset: 0;
+      border-radius: 70px;
+      background: radial-gradient(circle at 42% 38%, #fff4dc, #e3c592 48%, #c9a87c);
+      box-shadow: 0 0 34px 8px rgba(230, 196, 135, 0.85), inset 0 3px 0 rgba(255, 255, 255, 0.5);
+      opacity: 0;
+    }
+    .sw-label {
+      position: absolute;
+      top: 0;
+      height: 176px;
+      line-height: 176px;
+      font-family: "Heebo", sans-serif;
+      font-weight: 700;
+      font-size: 54px;
+      letter-spacing: 2px;
+      color: #e9e6e0;
+    }
+    #sw-off { right: 62px; }
+    #sw-on { left: 62px; color: #f4e6cc; opacity: 0; }
+
+    /* ---------- the poster ---------- */
+    #poster {
+      position: absolute;
+      left: 110px;
+      top: 470px;
+      width: 860px;
+      height: 1220px;
+      opacity: 0;
+    }
+    #po-shadow {
+      position: absolute;
+      inset: 0;
+      box-shadow: 0 26px 60px rgba(60, 40, 20, 0.3), 0 6px 14px rgba(60, 40, 20, 0.22);
+    }
+    #po-frame {
+      position: absolute;
+      inset: 0;
+      background: #b8946a;
+      padding: 8px;
+    }
+    #po-face {
+      position: absolute;
+      inset: 8px;
+      overflow: hidden;
+      background: #101017;
+      direction: rtl;
+    }
+    #po-arc {
+      position: absolute;
+      left: -380px;
+      top: -520px;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      background: #191922;
+      border: 2px solid rgba(201, 168, 124, 0.45);
+    }
+    #po-logo {
+      position: absolute;
+      right: 56px;
+      top: 48px;
+      width: 300px;
+    }
+    .po-h {
+      position: absolute;
+      right: 52px;
+      font-family: "Frank Ruhl Libre", serif;
+      font-weight: 900;
+      font-size: 210px;
+      line-height: 210px;
+      white-space: nowrap;
+    }
+    #po-h1 { top: 176px; color: #f4efe8; }
+    #po-h2 { top: 380px; color: var(--color-gold, #c9a87c); }
+    .po-sub {
+      position: absolute;
+      right: 58px;
+      font-family: "Heebo", sans-serif;
+      font-weight: 500;
+      font-size: 44px;
+      line-height: 58px;
+      color: rgba(244, 239, 232, 0.86);
+      white-space: nowrap;
+    }
+    #po-sub1 { top: 622px; }
+    #po-sub2 { top: 680px; }
+    #po-pill {
+      position: absolute;
+      right: 56px;
+      top: 770px;
+      height: 80px;
+      padding: 0 40px;
+      border: 2px solid rgba(244, 239, 232, 0.6);
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-family: "Heebo", sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      letter-spacing: 4px;
+      color: #f4efe8;
+      white-space: nowrap;
+    }
+    #po-arrow { font-weight: 500; letter-spacing: 0; color: var(--color-gold, #c9a87c); }
+    #po-photo {
+      position: absolute;
+      left: 56px;
+      right: 56px;
+      top: 890px;
+      height: 270px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(201, 168, 124, 0.5);
+    }
+    #po-img {
+      position: absolute;
+      left: -230px;
+      top: -560px;
+      width: 1240px;
+    }
+
+    /* Leaf shadows from a palm outside the window: they fall on the wall and the poster. */
+    #leaves {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      color: rgba(80, 60, 40, 0.11);
+      filter: blur(7px);
+    }
+    #leaves g { transform-box: view-box; }
+  </style>
+  <div id="root" data-composition-id="wall" data-width="1080" data-height="1920">
+    <div id="cam">
+      <div id="wall"></div>
+      <div id="window-light"></div>
+      <div id="jamb"></div>
+      <div id="ceiling"></div>
+      <div id="fixture"><div id="fixture-lens"><div id="fixture-on"></div></div></div>
+      <div id="skirting"></div>
+      <div id="floor"></div>
+      <div id="room-on"></div>
+      <div id="spill"></div>
+      <div id="ceil-glow"></div>
+
+      <div id="poster">
+        <div id="po-shadow"></div>
+        <div id="po-frame"></div>
+        <div id="po-face">
+          <div id="po-arc"></div>
+          <img id="po-logo" src="assets/img/logo-light.png" alt="Altit Luxury" />
+          <div id="po-h1" class="po-h" data-var-text="headline1">השקט</div>
+          <div id="po-h2" class="po-h" data-var-text="headline2">הופעל.</div>
+          <div id="po-sub1" class="po-sub" data-var-text="sub1">ניהול ואחזקת מבנים — אילת</div>
+          <div id="po-sub2" class="po-sub" data-var-text="sub2">לבעלי דירות בבתים משותפים</div>
+          <div id="po-pill"><span id="po-phone" dir="ltr" data-var-text="phone">054-792-3868</span><span id="po-arrow">←</span></div>
+          <div id="po-photo"><img id="po-img" src="assets/img/building-entrance.jpeg" alt="" /></div>
+        </div>
+      </div>
+
+      <div id="sw-plate">
+        <div id="sw-track">
+          <div id="sw-off" class="sw-label">OFF</div>
+          <div id="sw-on" class="sw-label">ON</div>
+          <div id="sw-knob"><div id="sw-knob-on"></div></div>
+        </div>
+      </div>
+
+      <svg id="leaves" viewBox="0 0 1080 1920" width="1080" height="1920">
+<g id="fr-a"><path d="M980.0,420.0 L943.5,433.0 L906.8,445.4 L869.8,457.2 L832.7,468.5 L795.3,479.2 L757.8,489.3 L720.0,498.8 L682.1,507.8 L643.9,516.2 L605.5,524.1 L566.9,531.4 L528.1,538.1 L489.1,544.2 L449.9,549.8 L410.5,554.8 L370.9,559.2" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+<ellipse cx="894.6" cy="491.7" rx="47.9" ry="8.5" transform="rotate(104.7 894.6 491.7)" fill="currentColor"/>
+<ellipse cx="868.1" cy="417.1" rx="47.9" ry="8.5" transform="rotate(216.2 868.1 417.1)" fill="currentColor"/>
+<ellipse cx="860.0" cy="490.7" rx="34.9" ry="8.2" transform="rotate(106.4 860.0 490.7)" fill="currentColor"/>
+<ellipse cx="841.5" cy="436.9" rx="34.9" ry="8.2" transform="rotate(215.6 841.5 436.9)" fill="currentColor"/>
+<ellipse cx="815.0" cy="522.1" rx="56.5" ry="8.0" transform="rotate(108.3 815.0 522.1)" fill="currentColor"/>
+<ellipse cx="786.6" cy="435.8" rx="56.5" ry="8.0" transform="rotate(215.3 786.6 435.8)" fill="currentColor"/>
+<ellipse cx="774.8" cy="534.4" rx="59.0" ry="7.8" transform="rotate(110.4 774.8 534.4)" fill="currentColor"/>
+<ellipse cx="747.1" cy="445.2" rx="59.0" ry="7.8" transform="rotate(215.2 747.1 445.2)" fill="currentColor"/>
+<ellipse cx="744.5" cy="520.8" rx="34.2" ry="7.5" transform="rotate(112.8 744.5 520.8)" fill="currentColor"/>
+<ellipse cx="729.8" cy="469.5" rx="34.2" ry="7.5" transform="rotate(215.3 729.8 469.5)" fill="currentColor"/>
+<ellipse cx="705.5" cy="529.5" rx="33.9" ry="7.2" transform="rotate(115.4 705.5 529.5)" fill="currentColor"/>
+<ellipse cx="692.5" cy="479.1" rx="33.9" ry="7.2" transform="rotate(215.6 692.5 479.1)" fill="currentColor"/>
+<ellipse cx="657.3" cy="554.1" rx="52.5" ry="7.0" transform="rotate(118.2 657.3 554.1)" fill="currentColor"/>
+<ellipse cx="639.7" cy="476.9" rx="52.5" ry="7.0" transform="rotate(216.2 639.7 476.9)" fill="currentColor"/>
+<ellipse cx="621.1" cy="553.9" rx="44.0" ry="6.8" transform="rotate(121.2 621.1 553.9)" fill="currentColor"/>
+<ellipse cx="608.7" cy="489.8" rx="44.0" ry="6.8" transform="rotate(216.9 608.7 489.8)" fill="currentColor"/>
+<ellipse cx="591.3" cy="544.8" rx="25.1" ry="6.5" transform="rotate(124.4 591.3 544.8)" fill="currentColor"/>
+<ellipse cx="585.7" cy="508.7" rx="25.1" ry="6.5" transform="rotate(217.9 585.7 508.7)" fill="currentColor"/>
+<ellipse cx="546.5" cy="557.6" rx="33.2" ry="6.2" transform="rotate(127.9 546.5 557.6)" fill="currentColor"/>
+<ellipse cx="541.2" cy="510.4" rx="33.2" ry="6.2" transform="rotate(219.2 541.2 510.4)" fill="currentColor"/>
+<ellipse cx="498.9" cy="571.0" rx="44.1" ry="6.0" transform="rotate(131.6 498.9 571.0)" fill="currentColor"/>
+<ellipse cx="494.7" cy="509.4" rx="44.1" ry="6.0" transform="rotate(220.6 494.7 509.4)" fill="currentColor"/>
+<ellipse cx="467.7" cy="565.2" rx="30.0" ry="5.8" transform="rotate(135.5 467.7 565.2)" fill="currentColor"/>
+<ellipse cx="466.9" cy="524.0" rx="30.0" ry="5.8" transform="rotate(222.3 466.9 524.0)" fill="currentColor"/>
+<ellipse cx="434.9" cy="562.6" rx="19.7" ry="5.5" transform="rotate(139.7 434.9 562.6)" fill="currentColor"/>
+<ellipse cx="435.8" cy="536.0" rx="19.7" ry="5.5" transform="rotate(224.2 435.8 536.0)" fill="currentColor"/>
+<ellipse cx="385.8" cy="572.7" rx="30.5" ry="5.2" transform="rotate(144.1 385.8 572.7)" fill="currentColor"/>
+<ellipse cx="389.4" cy="532.7" rx="30.5" ry="5.2" transform="rotate(226.3 389.4 532.7)" fill="currentColor"/>
+<ellipse cx="342.9" cy="576.3" rx="32.7" ry="5.0" transform="rotate(148.6 342.9 576.3)" fill="currentColor"/>
+<ellipse cx="349.3" cy="534.7" rx="32.7" ry="5.0" transform="rotate(228.6 349.3 534.7)" fill="currentColor"/></g>
+<g id="fr-b"><path d="M1120.0,900.0 L1080.6,893.3 L1041.0,887.2 L1001.4,881.7 L961.6,876.7 L921.8,872.3 L881.9,868.5 L841.8,865.2 L801.7,862.4 L761.5,860.3 L721.1,858.7 L680.7,857.6 L640.1,857.2 L599.5,857.3 L558.8,857.9" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+<ellipse cx="1003.6" cy="925.8" rx="53.7" ry="8.4" transform="rotate(134.1 1003.6 925.8)" fill="currentColor"/>
+<ellipse cx="1018.3" cy="838.5" rx="53.7" ry="8.4" transform="rotate(245.0 1018.3 838.5)" fill="currentColor"/>
+<ellipse cx="974.0" cy="909.3" rx="38.9" ry="8.1" transform="rotate(134.8 974.0 909.3)" fill="currentColor"/>
+<ellipse cx="983.8" cy="847.0" rx="38.9" ry="8.1" transform="rotate(243.1 983.8 847.0)" fill="currentColor"/>
+<ellipse cx="917.2" cy="920.8" rx="62.6" ry="7.9" transform="rotate(135.3 917.2 920.8)" fill="currentColor"/>
+<ellipse cx="931.3" cy="822.0" rx="62.6" ry="7.9" transform="rotate(241.0 931.3 822.0)" fill="currentColor"/>
+<ellipse cx="875.5" cy="917.8" rx="64.9" ry="7.6" transform="rotate(135.5 875.5 917.8)" fill="currentColor"/>
+<ellipse cx="888.1" cy="816.9" rx="64.9" ry="7.6" transform="rotate(238.6 888.1 816.9)" fill="currentColor"/>
+<ellipse cx="855.2" cy="894.6" rx="37.4" ry="7.3" transform="rotate(135.5 855.2 894.6)" fill="currentColor"/>
+<ellipse cx="861.0" cy="837.5" rx="37.4" ry="7.3" transform="rotate(236.1 861.0 837.5)" fill="currentColor"/>
+<ellipse cx="815.8" cy="891.0" rx="36.7" ry="7.0" transform="rotate(135.3 815.8 891.0)" fill="currentColor"/>
+<ellipse cx="819.9" cy="835.8" rx="36.7" ry="7.0" transform="rotate(233.3 819.9 835.8)" fill="currentColor"/>
+<ellipse cx="762.1" cy="902.3" rx="56.2" ry="6.7" transform="rotate(134.8 762.1 902.3)" fill="currentColor"/>
+<ellipse cx="765.7" cy="819.2" rx="56.2" ry="6.7" transform="rotate(230.2 765.7 819.2)" fill="currentColor"/>
+<ellipse cx="729.0" cy="893.8" rx="46.7" ry="6.4" transform="rotate(134.1 729.0 893.8)" fill="currentColor"/>
+<ellipse cx="729.6" cy="826.2" rx="46.7" ry="6.4" transform="rotate(227.0 729.6 826.2)" fill="currentColor"/>
+<ellipse cx="703.1" cy="877.9" rx="26.3" ry="6.1" transform="rotate(133.2 703.1 877.9)" fill="currentColor"/>
+<ellipse cx="702.0" cy="840.6" rx="26.3" ry="6.1" transform="rotate(223.4 702.0 840.6)" fill="currentColor"/>
+<ellipse cx="657.7" cy="883.2" rx="34.4" ry="5.9" transform="rotate(132.0 657.7 883.2)" fill="currentColor"/>
+<ellipse cx="654.2" cy="835.7" rx="34.4" ry="5.9" transform="rotate(219.7 654.2 835.7)" fill="currentColor"/>
+<ellipse cx="610.9" cy="891.3" rx="44.9" ry="5.6" transform="rotate(130.6 610.9 891.3)" fill="currentColor"/>
+<ellipse cx="603.7" cy="830.9" rx="44.9" ry="5.6" transform="rotate(215.7 603.7 830.9)" fill="currentColor"/>
+<ellipse cx="580.6" cy="880.6" rx="30.1" ry="5.3" transform="rotate(129.0 580.6 880.6)" fill="currentColor"/>
+<ellipse cx="573.9" cy="841.5" rx="30.1" ry="5.3" transform="rotate(211.5 573.9 841.5)" fill="currentColor"/>
+<ellipse cx="547.1" cy="873.4" rx="19.4" ry="5.0" transform="rotate(127.1 547.1 873.4)" fill="currentColor"/>
+<ellipse cx="541.5" cy="849.1" rx="19.4" ry="5.0" transform="rotate(207.1 541.5 849.1)" fill="currentColor"/></g>
+<g id="fr-c"><path d="M1060.0,1350.0 L1023.9,1332.9 L987.9,1315.3 L952.2,1297.2 L916.7,1278.8 L881.4,1259.8 L846.3,1240.4 L811.4,1220.6 L776.7,1200.3 L742.3,1179.5 L708.0,1158.3 L674.0,1136.6 L640.2,1114.5" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+<ellipse cx="952.7" cy="1335.2" rx="40.5" ry="8.3" transform="rotate(150.5 952.7 1335.2)" fill="currentColor"/>
+<ellipse cx="981.2" cy="1275.3" rx="40.5" ry="8.3" transform="rotate(260.5 981.2 1275.3)" fill="currentColor"/>
+<ellipse cx="926.4" cy="1310.6" rx="29.1" ry="8.0" transform="rotate(152.6 926.4 1310.6)" fill="currentColor"/>
+<ellipse cx="946.9" cy="1268.7" rx="29.1" ry="8.0" transform="rotate(259.6 946.9 1268.7)" fill="currentColor"/>
+<ellipse cx="874.7" cy="1298.4" rx="46.4" ry="7.7" transform="rotate(154.9 874.7 1298.4)" fill="currentColor"/>
+<ellipse cx="907.8" cy="1233.3" rx="46.4" ry="7.7" transform="rotate(258.9 907.8 1233.3)" fill="currentColor"/>
+<ellipse cx="837.4" cy="1278.0" rx="47.6" ry="7.3" transform="rotate(157.5 837.4 1278.0)" fill="currentColor"/>
+<ellipse cx="871.9" cy="1213.2" rx="47.6" ry="7.3" transform="rotate(258.5 871.9 1213.2)" fill="currentColor"/>
+<ellipse cx="820.8" cy="1249.6" rx="27.1" ry="7.0" transform="rotate(160.3 820.8 1249.6)" fill="currentColor"/>
+<ellipse cx="840.8" cy="1213.9" rx="27.1" ry="7.0" transform="rotate(258.3 840.8 1213.9)" fill="currentColor"/>
+<ellipse cx="786.2" cy="1228.1" rx="26.3" ry="6.7" transform="rotate(163.3 786.2 1228.1)" fill="currentColor"/>
+<ellipse cx="806.1" cy="1194.8" rx="26.3" ry="6.7" transform="rotate(258.3 806.1 1194.8)" fill="currentColor"/>
+<ellipse cx="738.1" cy="1209.4" rx="39.7" ry="6.3" transform="rotate(166.6 738.1 1209.4)" fill="currentColor"/>
+<ellipse cx="768.9" cy="1161.3" rx="39.7" ry="6.3" transform="rotate(258.6 768.9 1161.3)" fill="currentColor"/>
+<ellipse cx="710.3" cy="1185.0" rx="32.4" ry="6.0" transform="rotate(170.2 710.3 1185.0)" fill="currentColor"/>
+<ellipse cx="736.2" cy="1147.7" rx="32.4" ry="6.0" transform="rotate(259.2 736.2 1147.7)" fill="currentColor"/>
+<ellipse cx="690.2" cy="1160.2" rx="17.9" ry="5.7" transform="rotate(173.9 690.2 1160.2)" fill="currentColor"/>
+<ellipse cx="704.9" cy="1140.6" rx="17.9" ry="5.7" transform="rotate(259.9 704.9 1140.6)" fill="currentColor"/>
+<ellipse cx="651.1" cy="1137.5" rx="23.0" ry="5.3" transform="rotate(177.9 651.1 1137.5)" fill="currentColor"/>
+<ellipse cx="670.4" cy="1113.9" rx="23.0" ry="5.3" transform="rotate(260.9 670.4 1113.9)" fill="currentColor"/>
+<ellipse cx="611.0" cy="1113.4" rx="29.2" ry="5.0" transform="rotate(182.2 611.0 1113.4)" fill="currentColor"/>
+<ellipse cx="636.2" cy="1085.5" rx="29.2" ry="5.0" transform="rotate(262.2 636.2 1085.5)" fill="currentColor"/></g>
+
+      </svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = 9.0;
+      // Camera framing: scale s with the switch centre (540, 300) shown at screen (540, 760).
+      const close = (s) => ({ scale: s, x: 540 - 540 * s, y: 760 - 300 * s });
+      const wide = (s) => ({ scale: s, x: 540 - 540 * s, y: 1000 - 1000 * s });
+
+      tl.set("#cam", close(1.7), 0);
+      tl.to("#cam", { ...close(1.74), duration: 1.0, ease: "power1.inOut" }, 0);
+
+      // ON: the click, the knob slides, the switch lights gold.
+      const on = (t) => {
+        tl.to("#sw-knob", { x: 224, duration: 0.18, ease: "power4.out" }, t);
+        tl.to("#sw-track", { backgroundColor: "#121219", duration: 0.08, ease: "none" }, t);
+        tl.to("#sw-knob-on", { opacity: 1, duration: 0.06, ease: "none" }, t + 0.04);
+        tl.to("#sw-off", { opacity: 0, duration: 0.05, ease: "none" }, t);
+        tl.to("#sw-on", { opacity: 1, duration: 0.06, ease: "none" }, t + 0.06);
+        tl.to("#spill", { opacity: 1, duration: 0.12, ease: "power2.out" }, t + 0.04);
+        tl.to(["#room-on", "#fixture-on", "#ceil-glow"], { opacity: 1, duration: 0.14, ease: "power2.out" }, t + 0.067);
+        // The poster lights like a sign: on, a dip, on.
+        tl.set("#poster", { opacity: 1 }, t + 0.067);
+        tl.set("#poster", { opacity: 0.35 }, t + 0.1);
+        tl.set("#poster", { opacity: 1 }, t + 0.133);
+      };
+      const off = (t) => {
+        tl.to("#sw-knob", { x: 0, duration: 0.18, ease: "power4.out" }, t);
+        tl.to("#sw-track", { backgroundColor: "#5b5b60", duration: 0.08, ease: "none" }, t);
+        tl.to("#sw-knob-on", { opacity: 0, duration: 0.05, ease: "none" }, t);
+        tl.to("#sw-on", { opacity: 0, duration: 0.05, ease: "none" }, t);
+        tl.to("#sw-off", { opacity: 1, duration: 0.06, ease: "none" }, t + 0.06);
+        tl.to(["#spill", "#room-on", "#fixture-on", "#ceil-glow"], { opacity: 0, duration: 0.08, ease: "none" }, t + 0.03);
+        tl.set("#poster", { opacity: 0 }, t + 0.033);
+      };
+
+      on(1.0);
+      tl.to("#cam", { ...wide(1.0), duration: 1.2, ease: "power3.inOut" }, 1.35);
+      tl.to("#cam", { ...wide(1.04), duration: 4.75, ease: "none" }, 2.55);
+      off(7.3);
+      tl.to("#cam", { ...close(1.7), duration: 1.3, ease: "power2.inOut" }, 7.6);
+
+      // Leaves sway on a 4.5 s cycle, so frame 0 and the last frame match.
+      const sway = [
+        ["#fr-a", 980, 420, 2.5],
+        ["#fr-b", 1120, 900, -2.0],
+        ["#fr-c", 1060, 1350, 3.0]
+      ];
+      sway.forEach(([id, ox, oy, deg], i) => {
+        tl.set(id, { svgOrigin: ox + " " + oy, rotation: -deg }, 0);
+        tl.to(id, { rotation: deg, duration: T / 4, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["wall"] = tl;
+    })();
+  </script>
+</template>
